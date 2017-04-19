@@ -3,6 +3,11 @@ import { connect } from 'react-redux'
 import addSearch from '../actions/addSearch'
 import clearSearch from '../actions/clearSearch'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/lib/Button';
+import DropdownButton from 'react-bootstrap/lib/DropdownButton';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 
 
 
@@ -42,7 +47,7 @@ class Search extends React.Component {
   }
   showTopics(){
     return this.props.topics.map((topic) => {
-      return  <li>{topic.name}</li>
+      return  <MenuItem><Link to={`events`} role="menuitem" >{topic.name}</Link></MenuItem>
     })
   }
   // showResults(){
@@ -57,10 +62,11 @@ class Search extends React.Component {
         <input type='text' placeholder="Search" onChange={this.handleChange} value={this.state.search} />
         <input type="submit" value="GO" />
         </form>
-
-        <ul>
-        {this.showTopics()}
-        </ul>
+        <ButtonGroup vertical>
+        <DropdownButton title="Or Select By Topic" id="bg-vertical-dropdown-1">
+          {this.showTopics()}
+        </DropdownButton>
+        </ButtonGroup>
       </div>
     )
   }
