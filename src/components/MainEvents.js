@@ -4,6 +4,9 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 // import { bindActionCreators } from 'redux'
 import ListEvent from './ListEvent'
+import { Route } from 'react-router-dom'
+import EventShow from './EventShow'
+
 
 
 class MainEvents extends React.Component {
@@ -27,6 +30,7 @@ class MainEvents extends React.Component {
   // }
   getEvents() {
     return this.props.events.map((event) => {
+      debugger
       return <ListEvent event={event} />
     })
 
@@ -34,7 +38,9 @@ class MainEvents extends React.Component {
   render(){
     return (
       <div>
-        {this.getEvents()}
+        {this.props.events.map((event) => {
+          return <ListEvent event={event} />
+        })}
 
       </div>
     )

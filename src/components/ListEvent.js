@@ -15,7 +15,7 @@ class ListEvent extends React.Component {
     let event = this.props.event
     return(
       <div>
-        <Link to={`events/${event.id}`} > {event.name} </Link><br />
+        <Link to={`/events/${event.id}`} > {event.name} </Link><br />
         {event.description}<br />
         {event.date}<br />
         {event.cost}<br />

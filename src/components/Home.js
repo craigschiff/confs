@@ -7,7 +7,8 @@ export default class Home extends React.Component {
     return(
       <div>
         <h1>"WELCOME TO DEVCONF"</h1><br />
-        <Link to='/events'>See all Events</Link>
+        <Link to='/events'>See all Events</Link><br /> <br />
+        <Link to='/events/new'>Create an Event!</Link>
       </div>
     )
   }

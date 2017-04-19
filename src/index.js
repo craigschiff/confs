@@ -6,6 +6,8 @@ import App from './App';
 import Home from './components/Home'
 import NewEvent from './components/NewEvent'
 import EventShow from './components/EventShow'
+import TopicShow from './components/TopicShow'
+
 import { Provider } from 'react-redux';
 import './index.css';
 import thunk from 'redux-thunk';
@@ -18,7 +20,8 @@ import {
 } from 'react-router-redux'
 import {
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 
 const history = createHistory()
@@ -33,9 +36,27 @@ axios
 .get('http://localhost:3001/v1/events')
 .then((resp) => {
     let events = resp.data.data
+    let newEvent
     events.forEach((event) => {
-      store.dispatch({type: "RECEIVE_EVENT", payload: event.attributes})
+      newEvent = event.attributes
+      newEvent.id = event.id
+      store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
     })
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router history={history}>
+          <div>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/events" component={App} />
+              <Route exact path="/events/new" component={NewEvent} />
+              <Route path="/events/:id" component={EventShow} />
+              <Route exact path="/topics/:id" component={TopicShow} />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>, document.getElementById('container')
+    );
   })
 axios
 .get('http://localhost:3001/v1/topics')
@@ -45,18 +66,3 @@ axios
       store.dispatch({type: "RECEIVE_TOPIC", payload: topic.attributes})
     })
   })
-
-
-
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <div>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/events" component={App} />
-        <Route exact path="/events/new" component={NewEvent} />
-        <Route exact path="/events/:id" component={EventShow} />
-      </div>
-    </Router>
-  </Provider>, document.getElementById('container')
-);

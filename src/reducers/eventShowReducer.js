@@ -1,7 +1,7 @@
-export default function setEventReducer(state=[], action){
+export default function eventShowReducer(state={}, action){
   switch (action.type) {
     case 'SET_EVENT':
-      return state.concat(action.payload)
+      return action.payload
     case 'CLEAR_EVENT':
       return []
     default:
