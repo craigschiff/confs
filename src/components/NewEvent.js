@@ -22,7 +22,7 @@ export default class NewEvent extends React.Component {
           <input name="cost" type='text' placeholder="Event Cost" /><br />
           <input name="organizer" type='text' placeholder="Organizer" /><br />
           <input name="city" type='text' placeholder="City" /><br />
-          <input name="city" type='text' placeholder="Topic" /><br />
+          <input name="topic" type='text' placeholder="Topic" /><br />
           <input type='submit' value="Submit Conference" /><br />
 
         </form>

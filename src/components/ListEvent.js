@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+
 
 class ListEvent extends React.Component {
   // constructor(){
@@ -10,12 +12,13 @@ class ListEvent extends React.Component {
   //   debugger
   // }
   render() {
+    let event = this.props.event
     return(
       <div>
-        {this.props.event.name}<br />
-        {this.props.event.description}<br />
-        {this.props.event.date}<br />
-        {this.props.event.cost}<br />
+        <Link to=`events/${event.id} > {event.name} </Link><br />
+        {event.description}<br />
+        {event.date}<br />
+        {event.cost}<br />
         <br />
 
 
