@@ -25,12 +25,17 @@ class Search extends React.Component {
   handleSubmit(event){
     event.preventDefault()
     this.props.clearSearch('hi')
+    let search = []
     this.props.events.map((event) => {
       if (event.description.split(' ').map(element => element.toLowerCase()).includes(this.state.search.toLowerCase()) || this.state.search.split(' ').map(element => element.toLowerCase()).includes(event.description.toLowerCase())) {
         this.props.addSearch(event)
+        search.push(event)
+        return event
       }
-      return event
     })
+  if (!search.length > 0){
+    alert('There are no results')
+  }
   this.setState({search:''})
   //  this.showResults()
 
