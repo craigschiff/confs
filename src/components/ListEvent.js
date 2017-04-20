@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import Col from 'react-bootstrap/lib/Col'
+
 
 
 class ListEvent extends React.Component {
@@ -14,15 +16,12 @@ class ListEvent extends React.Component {
   render() {
     let event = this.props.event
     return(
-      <div>
+      <Col xs={6} md={4}>
         <Link to={`/events/${event.id}`} > {event.name} </Link><br />
         {event.description}<br />
         {event.date}<br />
         {event.cost}<br />
-        <br />
-
-
-      </div>
+        </Col>
     )
   }
 }

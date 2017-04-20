@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import setTopic from '../actions/setEvent'
-
-
+import NavbarMain from './NavbarMain'
+import TopicList from './TopicList'
 
 
 class TopicShow extends React.Component {
@@ -20,34 +20,13 @@ class TopicShow extends React.Component {
     // let event = this.props.events.filter(event => id == event.id)
     // this.props.setEvent(event[0])
   }
+
   render(){
-
-    // let event = this.props.showEvent
-
     return (
       <div>
-        <h1>{event.name}</h1><br />
-        {event.date}<br />
-        {event.cost}<br />
-        {event.description}<br />
-        {event.website}<br />
-
+        <NavbarMain />
+        <TopicList />
       </div>
     )
   }
 }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(EventShow)
-//
-// function mapStateToProps (state) {
-//   return {
-//     events: state.events,
-//      showEvent: state.eventShow
-//   }
-// }
-//
-// function mapDispatchToProps (dispatch) {
-//   return bindActionCreators({
-//     setEvent
-//   }, dispatch)
-// }

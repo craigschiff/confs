@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import setEvent from '../actions/setEvent'
-import EventShowList from './EventShowList'
-import NavbarMain from './NavbarMain'
-
 
 
 class EventShow extends React.Component {
@@ -26,8 +23,12 @@ class EventShow extends React.Component {
 
     return (
       <div>
-        <NavbarMain />
-        <EventShowList />
+        <h1>{event.name}</h1><br />
+        {event.date}<br />
+        {event.cost}<br />
+        {event.description}<br />
+        {event.website}<br />
+
       </div>
     )
   }

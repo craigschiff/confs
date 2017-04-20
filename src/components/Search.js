@@ -7,9 +7,6 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/lib/Button';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-
-
 
 
 class Search extends React.Component {
@@ -62,11 +59,7 @@ class Search extends React.Component {
         <input type='text' placeholder="Search" onChange={this.handleChange} value={this.state.search} />
         <input type="submit" value="GO" />
         </form>
-        <ButtonGroup vertical>
-        <DropdownButton title="Or Select By Topic" id="bg-vertical-dropdown-1">
-          {this.showTopics()}
-        </DropdownButton>
-        </ButtonGroup>
+
       </div>
     )
   }
