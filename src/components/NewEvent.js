@@ -1,8 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import Button from 'react-bootstrap/lib/Button';
+import DropdownButton from 'react-bootstrap/lib/DropdownButton';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 
-export default class NewEvent extends React.Component {
+
+
+class NewEvent extends React.Component {
   constructor(){
     super()
     this.state = {
@@ -18,20 +26,26 @@ export default class NewEvent extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleOnChange = this.handleOnChange.bind(this)
-
+    this.showTopics = this.showTopics.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
   handleSubmit(event){
     event.preventDefault()
+    let params = this.state
     axios
-    .post('/events', {this.state} )
+    .post('/v1/events', {params} )
     .then((response) => {
-      alert("SUCCESS")
+      debugger    
     })
-    .catch((response) => {
-      alert("FAILURE")
+    .catch((error) => {
+      throw(error)
     })
   }
+  handleSelect(key){
+    this.setState({topic: key})
+  }
   handleOnChange(event){
+
     let key = event.target.name
     let value = event.target.value
 
@@ -39,6 +53,12 @@ export default class NewEvent extends React.Component {
       [key]: value
     })
   }
+  showTopics(){
+    return this.props.topics.map((topic) => {
+      return  <MenuItem name="topic" value={topic.name} eventKey={topic.name} >{topic.name}</MenuItem>
+    })
+  }
+
   render() {
     return(
       <div>
@@ -52,6 +72,13 @@ export default class NewEvent extends React.Component {
           <textarea name="perks" type='text' value={this.state.perks} onChange={this.handleOnChange} placeholder="Presenter Perks" /><br />
           <input name="organizer" type='text' value={this.state.organizer} onChange={this.handleOnChange} placeholder="Organizer" /><br />
           <input name="city" type='text' value={this.state.city} onChange={this.handleOnChange} placeholder="City" /><br />
+          <ButtonGroup vertical>
+          <DropdownButton title={this.setTopic} id="bg-vertical-dropdown-1" onSelect={this.handleSelect}>
+            {this.showTopics()}
+          </DropdownButton>
+          </ButtonGroup>
+          <br />
+          <label>Or if not listed enter new topic below</label><br />
           <input name="topic" type='text' value={this.state.topic} onChange={this.handleOnChange} placeholder="Topic" /><br />
           <input type='submit' value="Submit Conference" /><br />
         </form>
@@ -59,3 +86,9 @@ export default class NewEvent extends React.Component {
     )
   }
 }
+export default connect(mapStateToProps)(NewEvent)
+
+function mapStateToProps (state) {
+  return {topics: state.topics,
+          sessions: state.session}
+        }

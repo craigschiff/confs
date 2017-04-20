@@ -4,6 +4,7 @@ import topics from './topicReducer'
 import search from './searchReducer'
 import eventShow from './eventShowReducer'
 import topicShow from './topicShowReducer'
+import session from './sessionReducer'
 
 
 import { combineReducers } from 'redux'
@@ -16,5 +17,6 @@ export default combineReducers({
   search,
   eventShow,
   topicShow,
+  session,
   router: routerReducer
 })
