@@ -7,7 +7,7 @@ import Home from './components/Home'
 import NewEvent from './components/NewEvent'
 import EventShow from './components/EventShow'
 import TopicShow from './components/TopicShow'
-
+import LoginPage from './components/LoginPage'
 import { Provider } from 'react-redux';
 import './index.css';
 import thunk from 'redux-thunk';
@@ -21,6 +21,7 @@ import {
 import {
   Route,
   Link,
+  Redirect,
   Switch
 } from 'react-router-dom'
 
@@ -48,6 +49,7 @@ axios
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={LoginPage} />
               <Route exact path="/events" component={App} />
               <Route exact path="/events/new" component={NewEvent} />
               <Route path="/events/:id" component={EventShow} />
@@ -58,6 +60,9 @@ axios
       </Provider>, document.getElementById('container')
     );
   })
+// axios
+// .post('http://localhost:3001/v1/username=dison')
+//
 axios
 .get('http://localhost:3001/v1/topics')
 .then((resp) => {
