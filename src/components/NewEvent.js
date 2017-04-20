@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 export default class NewEvent extends React.Component {
   constructor(){
@@ -10,6 +11,7 @@ export default class NewEvent extends React.Component {
       website: '',
       date: '',
       cost: '',
+      perks: '',
       organizer: '',
       city: '',
       topic: ''
@@ -20,7 +22,14 @@ export default class NewEvent extends React.Component {
   }
   handleSubmit(event){
     event.preventDefault()
-    debugger
+    axios
+    .post('/events', {this.state} )
+    .then((response) => {
+      alert("SUCCESS")
+    })
+    .catch((response) => {
+      alert("FAILURE")
+    })
   }
   handleOnChange(event){
     let key = event.target.name
@@ -29,8 +38,6 @@ export default class NewEvent extends React.Component {
     this.setState({
       [key]: value
     })
-    debugger
-
   }
   render() {
     return(
@@ -42,6 +49,7 @@ export default class NewEvent extends React.Component {
           <input name="website" type='text' value={this.state.website} onChange={this.handleOnChange} placeholder="Website URL" /><br />
           <input name="date" type="text" value={this.state.date} onChange={this.handleOnChange} placeholder="Enter Date" /><br />
           <input name="cost" type='text' value={this.state.cost} onChange={this.handleOnChange} placeholder="Event Cost" /><br />
+          <textarea name="perks" type='text' value={this.state.perks} onChange={this.handleOnChange} placeholder="Presenter Perks" /><br />
           <input name="organizer" type='text' value={this.state.organizer} onChange={this.handleOnChange} placeholder="Organizer" /><br />
           <input name="city" type='text' value={this.state.city} onChange={this.handleOnChange} placeholder="City" /><br />
           <input name="topic" type='text' value={this.state.topic} onChange={this.handleOnChange} placeholder="Topic" /><br />
