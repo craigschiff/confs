@@ -22,8 +22,9 @@ export default class NewEvent extends React.Component {
   }
   handleSubmit(event){
     event.preventDefault()
+    let params = this.state
     axios
-    .post('/events', {this.state} )
+    .post('/events', {params} )
     .then((response) => {
       alert("SUCCESS")
     })

@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MainEvents from './components/MainEvents'
-import Search from './components/Search'
+import NavbarMain from './components/NavbarMain'
+import Grid from 'react-bootstrap/lib/Grid'
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
 
 
 class App extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="Image">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to DevConf</h2>
-        </div>
-        <Search />
-        <MainEvents />
-      </div>
+      <Grid>
+        <Row>
+          <Col xs={12} md={12}>
+            <NavbarMain />
+          </Col>
+        </Row>
+        <Row>
+          <MainEvents />
+        </Row>
+      </Grid>
     );
   }
 }

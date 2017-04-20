@@ -30,7 +30,6 @@ class MainEvents extends React.Component {
   // }
   getEvents() {
     return this.props.events.map((event) => {
-      debugger
       return <ListEvent event={event} />
     })
 
