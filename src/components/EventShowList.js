@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import setEvent from '../actions/setEvent'
 
 
-class EventShow extends React.Component {
+class EventShowList extends React.Component {
   componentWillReceiveProps(nextProps){
     if (nextProps == this.props) { return }
     let id = parseInt(nextProps.match.params.id, 10)
@@ -35,12 +35,12 @@ class EventShow extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventShow)
+export default connect(mapStateToProps, mapDispatchToProps)(EventShowList)
 
 function mapStateToProps (state) {
   return {
     events: state.events,
-    showEvent: state.eventShow
+    showEvent: state.eventShowList
   }
 }
 
