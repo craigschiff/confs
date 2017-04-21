@@ -6,6 +6,7 @@ import App from './App';
 import LoginCheck from './components/LoginCheck'
 import NewEvent from './components/NewEvent'
 import EventShow from './components/EventShow'
+import EventEdit from './components/EventEdit'
 import TopicShow from './components/TopicShow'
 import LoginPage from './components/LoginPage'
 import { Provider } from 'react-redux';
@@ -41,6 +42,7 @@ axios
     events.forEach((event) => {
       newEvent = event.attributes
       newEvent.id = event.id
+
       store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
     })
     ReactDOM.render(
@@ -52,7 +54,8 @@ axios
               <Route path="/login" component={LoginPage} />
               <Route exact path="/events" component={App} />
               <Route path="/events/new" component={LoginCheck} />
-              <Route path="/events/:id" component={EventShow} />
+              <Route path="/events/:id/edit" component={EventEdit} />
+              <Route exact path="/events/:id" component={EventShow} />
               <Route path="/topics/:id" component={TopicShow} />
             </Switch>
           </div>

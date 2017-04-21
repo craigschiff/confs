@@ -1,64 +1,93 @@
-import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import React from 'react';
+import setEvent from '../actions/setEvent'
 import { push } from 'react-router-redux'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link, Redirect } from 'react-router-dom'
+import axios from 'axios'
 import Button from 'react-bootstrap/lib/Button';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import addEvent from '../actions/addEvent'
+import editEvent from '../actions/editEvent'
+import EventShow from './EventShow'
 
 
-class NewEvent extends React.Component {
-  constructor(){
-    super()
+
+
+
+class EventEdit extends React.Component {
+  constructor(props){
+    super(props)
     this.state = {
-      name: '',
-      description: '',
-      website: '',
-      date: '',
-      cost: '',
-      perks: '',
-      organizer: '',
-      city: '',
-      topic: '',
-      address: ''
+      name: props.showEvent.name,
+      description: props.showEvent.description,
+      website: props.showEvent.website,
+      date: props.showEvent.date,
+      cost: props.showEvent.cost,
+      perks: props.showEvent.perks,
+      organizer: props.showEvent.organizer,
+      city: props.showEvent.city,
+      topic: props.showEvent.topic,
+      address: props.showEvent.address,
+      id: props.showEvent.id
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleOnChange = this.handleOnChange.bind(this)
     this.showTopics = this.showTopics.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
-    this.addEvent = this.addEvent.bind(this)
-    // this.redirect = this.redirect.bind(this)
+    this.editEvent = this.editEvent.bind(this)
   }
-  // redirect(){
-  //   return (
-  //     <Redirect to={`/events/${this.state.id}`} />
-  //   )
-  //   // return this.props.history.push(`/events/${id}`)
-  // }
+
+  componentWillReceiveProps(nextProps){
+    if (this.props.showEvent.name) { return }
+    let id = parseInt(nextProps.match.params.id, 10)
+    let event = this.props.events.filter(event => id == event.id)
+    this.setState({
+      name: event[0].name,
+      description: event[0].description,
+      website: event[0].website,
+      date: event[0].date,
+      cost: event[0].cost,
+      perks: event[0].perks,
+      organizer: event[0].organizer.name,
+      city: event[0].city,
+      topic: event[0].topic.name,
+      address: event[0].address,
+      id: event[0].id
+    })
+    debugger
+    this.props.setEvent(event[0])
+    return
+  }
+  componentWillMount(){
+    if (this.props.showEvent.name) { return }
+    debugger
+    let id = parseInt(this.props.match.params.id, 10)
+    let event = this.props.events.filter(event => id == event.id)
+    this.props.setEvent(event[0])
+  }
+
   handleSubmit(event){
     event.preventDefault()
     let params = this.state
     axios
-    .post('http://localhost:3001/v1/events', {event: params} )
+    .patch(`http://localhost:3001/v1/events/${this.state.id}`, {event: params} )
     .then((response) => {
-      let createdEvent = response.data.data.attributes
-      createdEvent.id = response.data.data.id
+      let editedEvent = response.data.data.attributes
+      editedEvent.id = response.data.data.id
       // this.setState(
       //   {id: createdEvent.id,
       //     submitted: true})
-      this.addEvent(createdEvent)
-      this.props.push(`/events/${createdEvent.id}`)
+      this.editEvent(editedEvent)
+      this.props.push(`/events/${editedEvent.id}`)
     })
     .catch((error) => {
       throw(error)
     })
   }
-  addEvent(event){
-    this.props.addEvent(event)
+  editEvent(event){
+    this.props.editEvent(event)
   }
   handleSelect(key){
     this.setState({topic: key})
@@ -78,12 +107,12 @@ class NewEvent extends React.Component {
     })
   }
 
-  render() {
 
-    // {this.state.submitted ? this.redirect() : null }
-    return(
+  render(){
+
+    return (
       <div>
-        <h1>Add Your Conference!</h1>
+        <h1>Edit Your Conference!</h1>
         <form onSubmit={this.handleSubmit}>
           <input name="name" type='text' value={this.state.name} onChange={this.handleOnChange} placeholder="Event Name" /><br />
           <textarea name="description" value={this.state.description} onChange={this.handleOnChange} type='text' placeholder="Event Description" /><br />
@@ -108,16 +137,21 @@ class NewEvent extends React.Component {
     )
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(NewEvent)
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventEdit)
 
 function mapStateToProps (state) {
-  return {topics: state.topics,
-          sessions: state.session}
-    }
+  return {
+    events: state.events,
+    topics: state.topics,
+    showEvent: state.eventShow
+  }
+}
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    addEvent: addEvent,
+    setEvent,
+    editEvent,
     push: push
   }, dispatch)
 }
