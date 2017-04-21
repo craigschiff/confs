@@ -1,9 +1,10 @@
 export default function eventShowReducer(state={}, action){
   switch (action.type) {
     case 'SET_EVENT':
-      return action.payload
+      debugger
+      return action.event
     case 'CLEAR_EVENT':
-      return []
+      return {}
     default:
       return state
   }
