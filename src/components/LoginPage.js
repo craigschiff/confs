@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import login from '../actions/login'
+import NavbarMain from './NavbarMain'
 
 class LoginPage extends React.Component {
   constructor(){
@@ -67,18 +68,19 @@ class LoginPage extends React.Component {
   render(){
     return(
       <div>
-        <h2>PLEASE LOG IN OR SIGN UP BELOW!</h2><br /><br />
+        <NavbarMain />
+        <h2>Please log in or sign up below!</h2><br /><br />
         <label>For returning users: </label>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name='username' placeholder="Enter Username" onChange={this.handleChange} />
           <input type='password' name='password' placeholder="Enter Password" onChange={this.handleChange} />
-          <input type='submit' value="LOG IN" />
+          <input type='submit' value="Log In" />
         </form><br /><br />
         <label>And for new users, please sign in below: </label>
         <form onSubmit={this.handleSignUp}>
           <input type='text' name='username' placeholder="Enter Username" onChange={this.handleChange} />
           <input type='password' name='password' placeholder="Enter Password" onChange={this.handleChange} />
-          <input type='submit' value="SIGN UP" />
+          <input type='submit' value="Sign Up" />
         </form>
 
       </div>

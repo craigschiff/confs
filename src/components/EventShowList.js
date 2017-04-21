@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 import setEvent from '../actions/setEvent'
 
 
@@ -24,10 +25,10 @@ class EventShow extends React.Component {
     return (
       <div>
         <h1>{event.name}</h1><br />
-        {event.date}<br />
+        {event.date.split('T').shift().split('-').reverse().join('/')}<br />
         {event.cost}<br />
         {event.description}<br />
-        {event.website}<br />
+        <a href={event.website}>Check out their website</a><br />
 
       </div>
     )
