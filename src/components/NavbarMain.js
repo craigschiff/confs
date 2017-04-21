@@ -32,11 +32,23 @@ class NavbarMain extends React.Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
-              <MenuItem eventkey={1.1}>
-              
-              {this.showTopics()}
-
-              </MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Android</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Artificial Intelligence</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >C</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >C++</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >C#</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Go</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Java</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >JavaScript</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Microsoft</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Objective-C</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Perl</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Python</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >PHP</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >R</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Ruby</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Scratch</Link></MenuItem>
+              <MenuItem eventkey={1.1}><Link to={`events`} role="menuitem" >Swift</Link></MenuItem>
             </NavDropdown>
             <NavDropdown eventKey={2} title="Or By Organizer" id="basic-nav-dropdown-2">
               <MenuItem>{this.showTopics()}</MenuItem>
