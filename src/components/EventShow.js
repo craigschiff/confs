@@ -3,6 +3,7 @@ import setEvent from '../actions/setEvent'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import LoginPage from './LoginPage'
 
 
 
@@ -31,12 +32,14 @@ class EventShow extends React.Component {
       this.props.push(`/events/${this.props.match.params.id}/edit`)
     } else {
       alert('YOU NEED TO LOG IN FIRST')
+      return <LoginPage />
     }
   }
 
   render(){
 
     let event = this.props.showEvent
+    debugger
 
     return (
       <div>
@@ -45,8 +48,6 @@ class EventShow extends React.Component {
         {event.cost}<br />
         {event.description}<br />
         {event.website}<br />
-        {event.topic.name}<br />
-        {event.organizer.name}<br />
 
         <button onClick={this.handleClick}>Edit Event</button>
 

@@ -42,7 +42,6 @@ axios
     events.forEach((event) => {
       newEvent = event.attributes
       newEvent.id = event.id
-
       store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
     })
     ReactDOM.render(
