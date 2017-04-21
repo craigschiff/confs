@@ -16,6 +16,7 @@ class LoginPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleSignUp = this.handleSignUp.bind(this)
     this.redirect = this.redirect.bind(this)
+    this.login = this.login.bind(this)
   }
   handleChange({target}){
     let key = target.name
@@ -25,6 +26,9 @@ class LoginPage extends React.Component {
   redirect(){
     return this.props.history.push('/events/new')
   }
+  login(){
+    return this.props.login()
+  }
   handleSubmit(event){
     event.preventDefault()
     let params = this.state
@@ -33,7 +37,7 @@ class LoginPage extends React.Component {
     .post('http://localhost:3001/v1/sessions', { account: params })
     .then((response) => {
       sessionStorage.setItem('jwt', response.data.jwt)
-      login
+      // this.login()
       return this.redirect()
     })
     .catch((error) => {
@@ -51,8 +55,8 @@ class LoginPage extends React.Component {
     .then((response) => {
       sessionStorage.setItem('jwt', response.data.jwt)
       console.log(response.data.jwt)
-      login
-      this.redirect()
+      this.login()
+      return this.redirect
     })
     .catch((error) => {
       throw(error)
@@ -87,5 +91,5 @@ export default connect(null, mapDispatchToProps)(LoginPage)
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     login: login
-  })
+  }, dispatch)
 }

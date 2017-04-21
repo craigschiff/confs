@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux'
 import App from './App';
-import Home from './components/Home'
+import LoginCheck from './components/LoginCheck'
 import NewEvent from './components/NewEvent'
 import EventShow from './components/EventShow'
 import TopicShow from './components/TopicShow'
@@ -48,12 +48,12 @@ axios
         <Router history={history}>
           <div>
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/" component={App} />
+              <Route path="/login" component={LoginPage} />
               <Route exact path="/events" component={App} />
-              <Route exact path="/events/new" component={NewEvent} />
+              <Route path="/events/new" component={LoginCheck} />
               <Route path="/events/:id" component={EventShow} />
-              <Route exact path="/topics/:id" component={TopicShow} />
+              <Route path="/topics/:id" component={TopicShow} />
             </Switch>
           </div>
         </Router>
