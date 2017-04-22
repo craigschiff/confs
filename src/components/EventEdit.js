@@ -64,9 +64,10 @@ class EventEdit extends React.Component {
 
   handleSubmit(event){
     event.preventDefault()
+    debugger
     let params = this.state
     axios
-    .patch(`http://localhost:3001/v1/events/${this.state.id}`, {event: params} )
+    .post(`http://localhost:3001/v1/events/${this.state.id}`, {event: params} )
     .then((response) => {
       debugger
       let editedEvent = response.data.data.attributes
