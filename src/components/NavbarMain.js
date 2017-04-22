@@ -5,6 +5,8 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import Search from './Search'
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
+import Nav from 'react-bootstrap/lib/Nav';
+import NavItem from 'react-bootstrap/lib/NavItem';
 
 
 class NavbarMain extends React.Component {
@@ -32,30 +34,29 @@ class NavbarMain extends React.Component {
 
   render() {
     return(
-      <div>
-        <Navbar inverse collapseOnSelect>
+        <Navbar inverse collapseOnSelect id="Navbar">
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/events">DevCons</a>
+              <a class="logotext" href="/events">DevCons</a>
             </Navbar.Brand>
             <Navbar.Toggle />
-          <Search />
           </Navbar.Header>
+          <Search />
           <Navbar.Collapse>
-            <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
-              {this.showTopics()}
-            </NavDropdown>
-            <NavDropdown eventKey={2} title="Or By Organizer" id="basic-nav-dropdown-2">
-              <MenuItem>{this.showEvents()}</MenuItem>
-            </NavDropdown>
-            <NavDropdown eventKey={3} title="Or By City" id="basic-nav-dropdown-3">
-              <MenuItem>{this.showCities()}</MenuItem>
-            </NavDropdown>
+            <Nav pullRight>
+                <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
+                  {this.showTopics()}
+                </NavDropdown>
+                <NavDropdown eventKey={2} title="Or By Organizer" id="basic-nav-dropdown-2">
+                  <MenuItem>{this.showEvents()}</MenuItem>
+                </NavDropdown>
+                <NavDropdown eventKey={3} title="Or By City" id="basic-nav-dropdown-3">
+                  <MenuItem>{this.showCities()}</MenuItem>
+                </NavDropdown>
+                <NavItem eventKey={4} href='/login'>Login/Sign Up </NavItem>
+              </Nav>
           </Navbar.Collapse>
-          <Link to='/login'>Login/Sign Up</Link>
         </Navbar>
-      </div>
-
     )
   }
 }
