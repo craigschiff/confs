@@ -1,11 +1,8 @@
 import React from 'react';
-import axios from 'axios'
 // import addEvents from '../actions/addEvents'
 import { connect } from 'react-redux'
 // import { bindActionCreators } from 'redux'
 import ListEvent from './ListEvent'
-import { Route } from 'react-router-dom'
-import EventShow from './EventShow'
 
 
 
@@ -29,16 +26,16 @@ class MainEvents extends React.Component {
   //     })
   // }
   getEvents() {
-    return this.props.events.map((event) => {
-      return <ListEvent event={event} />
+    return this.props.events.map((event, index) => {
+      return <ListEvent key={index} event={event} />
     })
 
   }
   render(){
     return (
-      <div>
-        {this.props.events.map((event) => {
-          return <ListEvent event={event} />
+      <div key={5}>
+        {this.props.events.map((event, index) => {
+          return <ListEvent key={index} event={event} />
         })}
 
       </div>

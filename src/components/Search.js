@@ -4,8 +4,6 @@ import addSearch from '../actions/addSearch'
 import clearSearch from '../actions/clearSearch'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import Button from 'react-bootstrap/lib/Button';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 
 

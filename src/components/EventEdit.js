@@ -3,17 +3,11 @@ import setEvent from '../actions/setEvent'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
-import Button from 'react-bootstrap/lib/Button';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import editEvent from '../actions/editEvent'
-import EventShow from './EventShow'
-
-
-
 
 
 class EventEdit extends React.Component {
@@ -42,7 +36,7 @@ class EventEdit extends React.Component {
   componentWillReceiveProps(nextProps){
     if (this.props.showEvent.name) { return }
     let id = parseInt(nextProps.match.params.id, 10)
-    let event = this.props.events.filter(event => id == event.id)
+    let event = this.props.events.filter(event => id === event.id)
     this.setState({
       name: event[0].name,
       description: event[0].description,
@@ -64,7 +58,7 @@ class EventEdit extends React.Component {
     if (this.props.showEvent.name) { return }
     debugger
     let id = parseInt(this.props.match.params.id, 10)
-    let event = this.props.events.filter(event => id == event.id)
+    let event = this.props.events.filter(event => id === event.id)
     this.props.setEvent(event[0])
   }
 
