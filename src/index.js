@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux'
 import App from './App';
 import LoginCheck from './components/LoginCheck'
-import NewEvent from './components/NewEvent'
 import EventShow from './components/EventShow'
 import EventEdit from './components/EventEdit'
 import TopicShow from './components/TopicShow'
@@ -21,8 +20,6 @@ import {
 } from 'react-router-redux'
 import {
   Route,
-  Link,
-  Redirect,
   Switch
 } from 'react-router-dom'
 

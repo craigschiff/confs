@@ -3,10 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Search from './Search'
-import LoginPage from './LoginPage'
-import Button from 'react-bootstrap/lib/Button';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 
@@ -16,21 +12,21 @@ class NavbarMain extends React.Component {
 
   showTopics(){
   const topicsArray =   ["Android", "Artificial Intelligence", "C", "C++", "C#", "Go", "Java", "JavaScript", "Microsoft", "Objective-C", "Perl", "Python", "PHP", "R", "Ruby", "Scratch", "Swift"]
-    return topicsArray.map((topic) => {
-    return <MenuItem><Link to={`events`} role="menuitem" >{topic}</Link></MenuItem>
+    return topicsArray.map((topic, index) => {
+    return <MenuItem key={index}><Link to={`events`} role="menuitem" >{topic}</Link></MenuItem>
     })
   }
 
   showEvents(){
-    return this.props.events.map((event) => {
-    return <MenuItem><Link to={`events`} role="menuitem" >{event.organizer.name}</Link></MenuItem>
+    return this.props.events.map((event, index) => {
+    return <MenuItem key={index}><Link to={`events`} role="menuitem" >{event.organizer.name}</Link></MenuItem>
     })
   }
 
   showCities(){
   const citiesArray = ["New York", "San Francisco", "Chicago", "Los Angeles", "Boston", "Tel Aviv", "Seattle", "Berlin", "Singapore", "Paris", "Sao Paulo", "Moscow", "Austin", "Bangalore", "Sydney", "Toronto", "Vancouver", "Amsterdam", "Montreal"]
-    return citiesArray.map((city) => {
-    return <MenuItem><Link to={`events`} role="menuitem" >{city}</Link></MenuItem>
+    return citiesArray.map((city, index) => {
+    return <MenuItem key={index}><Link to={`events`} role="menuitem" >{city}</Link></MenuItem>
     })
   }
 
@@ -47,7 +43,7 @@ class NavbarMain extends React.Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
-              <MenuItem>{this.showTopics()}</MenuItem>
+              {this.showTopics()}
             </NavDropdown>
             <NavDropdown eventKey={2} title="Or By Organizer" id="basic-nav-dropdown-2">
               <MenuItem>{this.showEvents()}</MenuItem>
