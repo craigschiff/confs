@@ -37,7 +37,7 @@ class NavbarMain extends React.Component {
         <Navbar inverse collapseOnSelect id="Navbar">
           <Navbar.Header>
             <Navbar.Brand>
-              <a class="logotext" href="/events">DevCons</a>
+              <a className="logotext" href="/events">DevCons</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -52,8 +52,8 @@ class NavbarMain extends React.Component {
                 </NavDropdown>
                 <NavDropdown eventKey={3} title="Or By City" id="basic-nav-dropdown-3">
                   <MenuItem>{this.showCities()}</MenuItem>
+                  <NavItem eventKey={4}> <Link to="/login" class="login">Login/Sign Up</Link> </NavItem>
                 </NavDropdown>
-                <NavItem eventKey={4} href='/login'>Login/Sign Up </NavItem>
               </Nav>
           </Navbar.Collapse>
         </Navbar>

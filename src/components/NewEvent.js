@@ -7,6 +7,7 @@ import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import addEvent from '../actions/addEvent'
+import NavbarMain from '../components/NavbarMain'
 
 
 class NewEvent extends React.Component {
@@ -81,6 +82,7 @@ class NewEvent extends React.Component {
     // {this.state.submitted ? this.redirect() : null }
     return(
       <div>
+        <NavbarMain />
         <h1>Add Your Conference!</h1>
         <form onSubmit={this.handleSubmit}>
           <input name="name" type='text' value={this.state.name} onChange={this.handleOnChange} placeholder="Event Name" /><br />
