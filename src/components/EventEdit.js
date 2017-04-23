@@ -96,7 +96,7 @@ class EventEdit extends React.Component {
   }
   showTopics(){
     return this.props.topics.map((topic) => {
-      return  <MenuItem name="topic" value={topic.name} eventKey={topic.name} >{topic.name}</MenuItem>
+      return  <MenuItem key={topic.id} name="topic" value={topic.name} eventKey={topic.name} >{topic.name}</MenuItem>
     })
   }
 
