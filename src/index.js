@@ -11,7 +11,6 @@ import EventEdit from './components/EventEdit'
 import TopicShow from './components/TopicShow'
 import LoginPage from './components/LoginPage'
 import { Provider } from 'react-redux';
-import './index.css';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
 import axios from 'axios'

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import MainEvents from './components/MainEvents'
 import NavbarMain from './components/NavbarMain'
 import Grid from 'react-bootstrap/lib/Grid'
@@ -12,9 +11,7 @@ class App extends Component {
     return (
       <Grid>
         <Row>
-          <Col xs={12} md={12}>
             <NavbarMain />
-          </Col>
         </Row>
         <Row>
           <MainEvents />

@@ -10,9 +10,6 @@ class ListEvent extends React.Component {
   //   this.listItem = this.listItem.bind(this)
   // }
   //
-  // listItem() {
-  //   debugger
-  // }
 
   render() {
     let event = this.props.event

@@ -8,6 +8,7 @@ import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import editEvent from '../actions/editEvent'
+import NavbarMain from '../components/NavbarMain'
 
 
 class EventEdit extends React.Component {
@@ -50,13 +51,11 @@ class EventEdit extends React.Component {
       address: event[0].address,
       id: event[0].id
     })
-    debugger
     this.props.setEvent(event[0])
     return
   }
   componentWillMount(){
     if (this.props.showEvent.name) { return }
-    debugger
     let id = parseInt(this.props.match.params.id, 10)
     let event = this.props.events.filter(event => id === event.id)
     this.props.setEvent(event[0])
@@ -64,12 +63,10 @@ class EventEdit extends React.Component {
 
   handleSubmit(event){
     event.preventDefault()
-    debugger
     let params = this.state
     axios
     .post(`http://localhost:3001/v1/events/${this.state.id}`, {event: params} )
     .then((response) => {
-      debugger
       let editedEvent = response.data.data.attributes
       editedEvent.id = response.data.data.id
       // this.setState(
@@ -108,6 +105,7 @@ class EventEdit extends React.Component {
 
     return (
       <div>
+        <NavbarMain />
         <h1>Edit Your Conference!</h1>
         <form onSubmit={this.handleSubmit}>
           <input name="name" type='text' value={this.state.name} onChange={this.handleOnChange} placeholder="Event Name" /><br />
