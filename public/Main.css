@@ -4,7 +4,6 @@
 
 
 .App-header {
-  background-color: #3b5998;
   height: 100px;
   padding: 20px;
   color: white;
@@ -12,4 +11,13 @@
 
 .App-intro {
   font-size: large;
+}
+
+#Navbar {
+  background-color: #3b5998;
+}
+
+.logotext {
+  font-size: large;
+
 }

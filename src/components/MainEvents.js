@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import ListEvent from './ListEvent'
 
 
-
 class MainEvents extends React.Component {
   constructor() {
     super()
@@ -42,7 +41,6 @@ class MainEvents extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   if (state.search.length > 0){

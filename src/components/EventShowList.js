@@ -26,10 +26,8 @@ class EventShowList extends React.Component {
       <div>
         <h1>{event.name}</h1><br />
         {event.date.split('T').shift().split('-').reverse().join('/')}<br />
-        {event.cost}<br />
         {event.description}<br />
         <a href={event.website}>Check out their website</a><br />
-
       </div>
     )
   }
