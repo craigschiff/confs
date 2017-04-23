@@ -5,7 +5,7 @@
 
 .App-header {
   height: 100px;
-  padding: 20px;
+  padding: 10px;
   color: white;
 }
 
@@ -17,7 +17,22 @@
   background-color: #3b5998;
 }
 
+#search-bar {
+  padding-top: 10px;
+}
+
 .logotext {
   font-size: large;
+  color: black;
+  font-family: 'Rubik Mono One', sans-serif;
+}
 
+.mainEventDiv {
+  height: 20%;
+  width: 20%;
+  padding 10em,10em,10em,10em;
+}
+
+.login {
+  color:grey;
 }

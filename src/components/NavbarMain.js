@@ -44,6 +44,8 @@ class NavbarMain extends React.Component {
           <Search />
           <Navbar.Collapse>
             <Nav pullRight>
+              <NavItem eventKey={.5} href='/about'>About</NavItem>
+              <NavItem eventKey={.5} href='/events/new'>Add Event</NavItem>
                 <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
                   {this.showTopics()}
                 </NavDropdown>
@@ -53,7 +55,7 @@ class NavbarMain extends React.Component {
                 <NavDropdown eventKey={3} title="Or By City" id="basic-nav-dropdown-3">
                   <MenuItem>{this.showCities()}</MenuItem>
                 </NavDropdown>
-                <NavItem eventKey={4} href='/login'>Login/Sign Up </NavItem>
+                <NavItem eventKey={4} href='/login'> <Link to="/login">Login/Sign Up </Link> </NavItem>
               </Nav>
           </Navbar.Collapse>
         </Navbar>

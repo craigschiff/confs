@@ -1,5 +1,6 @@
 import React from 'react';
 import setEvent from '../actions/setEvent'
+import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -16,7 +17,6 @@ class EventShow extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps){
-
     if (nextProps === this.props) { return }
     let id = parseInt(nextProps.match.params.id, 10)
     let event = this.props.events.filter(event => id == event.id)
@@ -44,19 +44,19 @@ class EventShow extends React.Component {
   render(){
 
     let event = this.props.showEvent
-    debugger
 
     return (
       <div>
+
         <NavbarMain />
         <div>
         <h1>{event.name}</h1><br />
-        Date: {event.date ? event.date.slice(0,10) : null}<br />
-        Cost: {event.cost}<br />
-        Description: {event.description}<br />
-        Website: {event.website}<br />
-        Organizer: {event.organizer ? event.organizer.name : null}<br />
-        Topic: {event.topic ? event.topic.name : null}<br />
+        <strong>Date: </strong>{event.date ? event.date.slice(0,10) : null}<br />
+        <strong>Cost: </strong>{event.cost}<br />
+        <strong>Description: </strong>{event.description}<br />
+        <strong>Website: </strong><br />
+        <strong>Organizer: </strong>{event.organizer ? event.organizer.name : null}<br />
+        <strong>Topic: </strong>{event.topic ? event.topic.name : null}<br />
 
 
         <button onClick={this.handleClick}>Edit Event</button>
