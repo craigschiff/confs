@@ -10,22 +10,21 @@ class ListEvent extends React.Component {
   //   this.listItem = this.listItem.bind(this)
   // }
   //
-  // listItem() {
-  //   debugger
-  // }
 
   render() {
     let event = this.props.event
     return(
       <Col xs={6} md={4}>
-        <Link to={`/events/${event.id}`} > {event.name} </Link><br />
-        <strong>Date:</strong>{event.date.split('T').shift().split('-').reverse().join('/')}<br />
-        {event.cost}<br />
-        <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
-           {event.description}
-        </Truncate>
-        <br />
-        {event.image}
+        <div class="mainEventDiv">
+          <Link to={`/events/${event.id}`}><h4>{event.name}</h4> </Link>
+          <strong>Date:</strong>{event.date.split('T').shift().split('-').reverse().join('/')}
+          {event.cost}<br />
+          <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
+             {event.description}
+          </Truncate>
+          <br />
+          {event.img}
+          </div>
         </Col>
     )
   }

@@ -12,7 +12,6 @@ class EventShow extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
   componentWillReceiveProps(nextProps){
-    debugger
     if (nextProps === this.props) { return }
     let id = parseInt(nextProps.match.params.id, 10)
     let event = this.props.events.filter(event => id === event.id)
