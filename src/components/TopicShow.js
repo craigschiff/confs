@@ -6,7 +6,7 @@ import NavbarMain from './NavbarMain'
 import TopicList from './TopicList'
 
 
-class TopicShow extends React.Component {
+export default class TopicShow extends React.Component {
   componentWillReceiveProps(nextProps){
     if (nextProps == this.props) { return }
     // let id = parseInt(nextProps.match.params.id, 10)
