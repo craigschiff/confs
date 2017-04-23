@@ -68,7 +68,12 @@ axios
 .get('http://localhost:3001/v1/topics')
 .then((resp) => {
     let topics = resp.data.data
+    let newTopic
     topics.forEach((topic) => {
-      store.dispatch({type: "RECEIVE_TOPIC", payload: topic.attributes})
+      newTopic = topic.attributes
+      newTopic.id = topic.id
+      newTopic.events = [] //plucking event ID out of events association
+      topic.relationships.events.data.forEach(event => newTopic.events.push(event.id))
+      store.dispatch({type: "RECEIVE_TOPIC", payload: newTopic})
     })
   })

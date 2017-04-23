@@ -1,6 +1,6 @@
-export default function setTopic(payload){
+export default function setTopic(topic){
   return {
-    type: "SET_EVENT",
-    payload: payload
+    type: "SET_TOPIC",
+    topic: topic
   }
 }

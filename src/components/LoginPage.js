@@ -1,11 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-// import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 // import login from '../actions/login'
+import { push } from 'react-router-redux'
 import NavbarMain from './NavbarMain'
 
-export default class LoginPage extends React.Component {
+class LoginPage extends React.Component {
   constructor(){
     super()
     this.state = {
@@ -24,7 +25,11 @@ export default class LoginPage extends React.Component {
     this.setState( { [key] : value } )
   }
   redirect(){
-    return this.props.history.push('/events/new')
+    if (this.props.path) {
+      this.props.push(this.props.path)
+    }else {
+      return this.props.history.push('/events/new')
+    }
   }
   // login(){
   //   return this.props.login()
@@ -85,10 +90,10 @@ export default class LoginPage extends React.Component {
   }
 }
 
-// export default connect(null, mapDispatchToProps)(LoginPage)
+export default connect(null, mapDispatchToProps)(LoginPage)
 
-// function mapDispatchToProps(dispatch){
-//   return bindActionCreators({
-//     login: login
-//   }, dispatch)
-// }
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+    push: push
+  }, dispatch)
+}

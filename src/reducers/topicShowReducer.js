@@ -1,7 +1,8 @@
-export default function topicShowReducer(state=[], action){
+export default function topicShowReducer(state={}, action){
   switch (action.type) {
     case 'SET_TOPIC':
-      return action.payload
+      debugger
+      return action.topic
     case 'CLEAR_TOPIC':
       return []
     default:

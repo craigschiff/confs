@@ -16,6 +16,7 @@ class ListEvent extends React.Component {
 
   render() {
     let event = this.props.event
+    
     return(
       <Col xs={6} md={4}>
         <Link to={`/events/${event.id}`} > {event.name} </Link><br />
@@ -24,6 +25,8 @@ class ListEvent extends React.Component {
         <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
            {event.description}
         </Truncate>
+        <br />
+        {event.topic ? <Link to={`/topics/${event.topic.id}`}>{event.topic.name}</Link> : null}
         <br />
         {event.image}
         </Col>

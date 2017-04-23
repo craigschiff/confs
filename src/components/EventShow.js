@@ -11,6 +11,9 @@ class EventShow extends React.Component {
   constructor(){
     super()
     this.handleClick = this.handleClick.bind(this)
+    this.state = {
+      needLogin: false
+    }
   }
   componentWillReceiveProps(nextProps){
 
@@ -32,7 +35,8 @@ class EventShow extends React.Component {
       this.props.push(`/events/${this.props.match.params.id}/edit`)
     } else {
       alert('YOU NEED TO LOG IN FIRST')
-      this.props.push('/login')
+      this.setState({needLogin: true})
+      // this.props.push('/login')
     }
   }
 
@@ -57,6 +61,7 @@ class EventShow extends React.Component {
 
         <button onClick={this.handleClick}>Edit Event</button>
         </div>
+        {this.state.needLogin ? <LoginPage path={`/events/${this.props.match.params.id}/edit`} /> : null}
       </div>
     )
   }
