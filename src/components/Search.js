@@ -4,9 +4,12 @@ import addSearch from '../actions/addSearch'
 import clearSearch from '../actions/clearSearch'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import Button from 'react-bootstrap/lib/Button';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
+import Navbar from 'react-bootstrap/lib/Navbar';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import Button from 'react-bootstrap/lib/Button';
+
 
 
 class Search extends React.Component {
@@ -21,9 +24,11 @@ class Search extends React.Component {
     this.showResults = this.showTopics.bind(this)
 
   }
+
   handleChange(event){
     this.setState({search: event.target.value})
   }
+
   handleSubmit(event){
     event.preventDefault()
     this.props.clearSearch('hi')
@@ -55,13 +60,12 @@ class Search extends React.Component {
 
   render(){
     return(
-      <div>
-        <label>Search for Conference</label>
+      <div id="search-bar">
+        <h4>Search for Conference</h4>
         <form onSubmit={this.handleSubmit}>
         <input type='text' placeholder="Search" onChange={this.handleChange} value={this.state.search} />
         <input type="submit" value="GO" />
         </form>
-
       </div>
     )
   }

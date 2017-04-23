@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import login from '../actions/login'
 import NavbarMain from './NavbarMain'
