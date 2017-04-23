@@ -1,10 +1,9 @@
-export default function sessionReducer(state=false, action){
+export default function sessionReducer(state=localStorage.getItem, action){
   switch (action.type) {
     case 'LOGIN':
-      debugger
-      return true
+      return localStorage.getItem
     case 'LOGOUT':
-      return false
+      return localStorage.getItem
     default:
       return state
   }
