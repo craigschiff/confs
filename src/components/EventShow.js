@@ -4,6 +4,7 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginPage from './LoginPage'
+import NavbarMain from './NavbarMain'
 
 
 class EventShow extends React.Component {
@@ -31,9 +32,10 @@ class EventShow extends React.Component {
       this.props.push(`/events/${this.props.match.params.id}/edit`)
     } else {
       alert('YOU NEED TO LOG IN FIRST')
-      return <LoginPage />
+      this.props.push('/login')
     }
   }
+
 
   render(){
 
@@ -42,14 +44,19 @@ class EventShow extends React.Component {
 
     return (
       <div>
+        <NavbarMain />
+        <div>
         <h1>{event.name}</h1><br />
-        {event.date}<br />
-        {event.cost}<br />
-        {event.description}<br />
-        {event.website}<br />
+        Date: {event.date ? event.date.slice(0,10) : null}<br />
+        Cost: {event.cost}<br />
+        Description: {event.description}<br />
+        Website: {event.website}<br />
+        Organizer: {event.organizer ? event.organizer.name : null}<br />
+        Topic: {event.topic ? event.topic.name : null}<br />
+
 
         <button onClick={this.handleClick}>Edit Event</button>
-
+        </div>
       </div>
     )
   }
