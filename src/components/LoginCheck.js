@@ -8,7 +8,7 @@ class LoginCheck extends React.Component {
   render() {
     return(
       <div>
-      {sessionStorage.getItem('jwt') ? <NewEvent /> : this.props.history.push('/login')}
+      {localStorage.getItem('jwt') ? <NewEvent /> : this.props.history.push('/login')}
 
       </div>
     )

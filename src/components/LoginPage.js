@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
     axios
     .post('http://localhost:3001/v1/sessions', { account: params })
     .then((response) => {
-      sessionStorage.setItem('jwt', response.data.jwt)
+      localStorage.setItem('jwt', response.data.jwt)
       // this.login()
       return this.redirect()
     })
@@ -56,7 +56,7 @@ class LoginPage extends React.Component {
     axios
     .post('http://localhost:3001/v1/registrations', { account: params })
     .then((response) => {
-      sessionStorage.setItem('jwt', response.data.jwt)
+      localStorage.setItem('jwt', response.data.jwt)
       console.log(response.data.jwt)
       // this.login()
       return this.redirect()
