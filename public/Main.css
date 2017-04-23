@@ -23,6 +23,8 @@
 
 .logotext {
   font-size: large;
+  color: black;
+  font-family: 'Rubik Mono One', sans-serif;
 }
 
 .mainEventDiv {

@@ -63,7 +63,7 @@ class Search extends React.Component {
       <div id="search-bar">
         <form onSubmit={this.handleSubmit}>
         <input type='text' placeholder="Search for Conference" onChange={this.handleChange} value={this.state.search} />
-        <input type="submit" value="GO" />
+        <input type="submit" value="Go" />
         </form>
       </div>
     )

@@ -9,11 +9,11 @@ import NavbarMain from './NavbarMain'
 
 class EventShow extends React.Component {
   constructor(){
+    debugger
     super()
     this.handleClick = this.handleClick.bind(this)
   }
   componentWillReceiveProps(nextProps){
-
     if (nextProps === this.props) { return }
     let id = parseInt(nextProps.match.params.id, 10)
     let event = this.props.events.filter(event => id == event.id)
@@ -47,7 +47,7 @@ class EventShow extends React.Component {
         {event.date}<br />
         {event.cost}<br />
         {event.description}<br />
-        {event.website}<br />
+        <a href={event.website}> Check it out on Eventbrite</a><br />
         <button onClick={this.handleClick}>Edit Event</button>
       </div>
     )
