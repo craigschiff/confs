@@ -37,7 +37,7 @@ class NavbarMain extends React.Component {
         <Navbar inverse collapseOnSelect id="Navbar">
           <Navbar.Header>
             <Navbar.Brand>
-              <a class="logotext" href="/events">DevCons</a>
+              <a className="logotext" href="/events">DevCons</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>

@@ -12,17 +12,18 @@ class EventShow extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
   componentWillReceiveProps(nextProps){
-    debugger
+
     if (nextProps === this.props) { return }
     let id = parseInt(nextProps.match.params.id, 10)
-    let event = this.props.events.filter(event => id === event.id)
+    let event = this.props.events.filter(event => id == event.id)
     this.props.setEvent(event[0])
   }
   componentWillMount(){
+
     if (this.props.showEvent.name) { return }
 
     let id = parseInt(this.props.match.params.id, 10)
-    let event = this.props.events.filter(event => id === event.id)
+    let event = this.props.events.filter(event => id == event.id)
     this.props.setEvent(event[0])
   }
   handleClick(){

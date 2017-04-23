@@ -19,7 +19,7 @@ class ListEvent extends React.Component {
     return(
       <Col xs={6} md={4}>
         <Link to={`/events/${event.id}`} > {event.name} </Link><br />
-        <strong>Date:</strong>{event.date.split('T').shift().split('-').reverse().join('/')}<br />
+        <strong>Date:</strong>{event.date ? event.date.split('T').shift().split('-').reverse().join('/') : null}<br />
         {event.cost}<br />
         <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
            {event.description}
