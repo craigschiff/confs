@@ -1,11 +1,11 @@
 import React from 'react'
 import axios from 'axios'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import login from '../actions/login'
+// import { connect } from 'react-redux'
+// import { bindActionCreators } from 'redux'
+// import login from '../actions/login'
 import NavbarMain from './NavbarMain'
 
-class LoginPage extends React.Component {
+export default class LoginPage extends React.Component {
   constructor(){
     super()
     this.state = {
@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleSignUp = this.handleSignUp.bind(this)
     this.redirect = this.redirect.bind(this)
-    this.login = this.login.bind(this)
+    // this.login = this.login.bind(this)
   }
   handleChange({target}){
     let key = target.name
@@ -26,13 +26,12 @@ class LoginPage extends React.Component {
   redirect(){
     return this.props.history.push('/events/new')
   }
-  login(){
-    return this.props.login()
-  }
+  // login(){
+  //   return this.props.login()
+  // }
   handleSubmit(event){
     event.preventDefault()
     let params = this.state
-    let login = this.props.login.bind(this)
     axios
     .post('http://localhost:3001/v1/sessions', { account: params })
     .then((response) => {
@@ -49,14 +48,13 @@ class LoginPage extends React.Component {
   handleSignUp(event){
     event.preventDefault()
     let params = this.state
-    let login = this.props.login.bind(this)
     axios
     .post('http://localhost:3001/v1/registrations', { account: params })
     .then((response) => {
       sessionStorage.setItem('jwt', response.data.jwt)
       console.log(response.data.jwt)
-      this.login()
-      return this.redirect
+      // this.login()
+      return this.redirect()
     })
     .catch((error) => {
       throw(error)
@@ -87,10 +85,10 @@ class LoginPage extends React.Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginPage)
+// export default connect(null, mapDispatchToProps)(LoginPage)
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({
-    login: login
-  }, dispatch)
-}
+// function mapDispatchToProps(dispatch){
+//   return bindActionCreators({
+//     login: login
+//   }, dispatch)
+// }

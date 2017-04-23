@@ -67,7 +67,6 @@ class EventEdit extends React.Component {
     axios
     .post(`http://localhost:3001/v1/events/${this.state.id}`, {event: params} )
     .then((response) => {
-      debugger
       let editedEvent = response.data.data.attributes
       editedEvent.id = response.data.data.id
       // this.setState(

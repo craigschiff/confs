@@ -1,5 +1,6 @@
 import React from 'react';
 import setEvent from '../actions/setEvent'
+import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -9,7 +10,6 @@ import NavbarMain from './NavbarMain'
 
 class EventShow extends React.Component {
   constructor(){
-    debugger
     super()
     this.handleClick = this.handleClick.bind(this)
   }
@@ -32,9 +32,10 @@ class EventShow extends React.Component {
       this.props.push(`/events/${this.props.match.params.id}/edit`)
     } else {
       alert('YOU NEED TO LOG IN FIRST')
-      return <LoginPage />
+      this.props.push('/login')
     }
   }
+
 
   render(){
 
@@ -42,13 +43,20 @@ class EventShow extends React.Component {
 
     return (
       <div>
-      <NavbarMain />
+
+        <NavbarMain />
+        <div>
         <h1>{event.name}</h1><br />
-        {event.date}<br />
-        {event.cost}<br />
-        {event.description}<br />
-        <a href={event.website}> Check it out on Eventbrite</a><br />
+        <strong>Date: </strong>{event.date ? event.date.slice(0,10) : null}<br />
+        <strong>Cost: </strong>{event.cost}<br />
+        <strong>Description: </strong>{event.description}<br />
+        <strong>Website: </strong><br />
+        <strong>Organizer: </strong>{event.organizer ? event.organizer.name : null}<br />
+        <strong>Topic: </strong>{event.topic ? event.topic.name : null}<br />
+
+
         <button onClick={this.handleClick}>Edit Event</button>
+        </div>
       </div>
     )
   }
