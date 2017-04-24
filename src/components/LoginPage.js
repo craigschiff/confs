@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-// import login from '../actions/login'
+import login from '../actions/login'
 import { push } from 'react-router-redux'
 import NavbarMain from './NavbarMain'
 
@@ -17,7 +17,7 @@ class LoginPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleSignUp = this.handleSignUp.bind(this)
     this.redirect = this.redirect.bind(this)
-    // this.login = this.login.bind(this)
+    this.login = this.login.bind(this)
   }
   handleChange({target}){
     let key = target.name
@@ -31,9 +31,9 @@ class LoginPage extends React.Component {
       return this.props.history.push('/events/new')
     }
   }
-  // login(){
-  //   return this.props.login()
-  // }
+  login(){
+    return this.props.login()
+  }
   handleSubmit(event){
     event.preventDefault()
     let params = this.state
@@ -42,7 +42,7 @@ class LoginPage extends React.Component {
     .then((response) => {
       debugger
       localStorage.setItem('jwt', response.data.jwt)
-      // this.login()
+      this.login()
       return this.redirect()
     })
     .catch((error) => {
@@ -95,6 +95,7 @@ export default connect(null, mapDispatchToProps)(LoginPage)
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    push: push
+    push: push,
+    login: login
   }, dispatch)
 }

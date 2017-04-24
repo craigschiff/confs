@@ -7,6 +7,8 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import logout from '../actions/logout';
+import { bindActionCreators } from 'redux'
 
 
 class NavbarMain extends React.Component {
@@ -14,6 +16,10 @@ class NavbarMain extends React.Component {
   constructor(){
     super()
     this.handleClick = this.handleClick.bind(this)
+  }
+
+  shouldComponentUpdate(){
+
   }
 
   showTopics(){
@@ -24,6 +30,7 @@ class NavbarMain extends React.Component {
   }
   handleClick(){
     localStorage.clear()
+    this.props.logout()
     return
   }
 
@@ -78,7 +85,14 @@ class NavbarMain extends React.Component {
 function mapStateToProps(state) {
   return {
     events: state.events,
-    topics: state.topics
+    topics: state.topics,
+    login: state.session
   }
 }
-export default connect(mapStateToProps)(NavbarMain)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    logout
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarMain)
