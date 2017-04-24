@@ -1,5 +1,7 @@
 import React from 'react';
 import setEvent from '../actions/setEvent'
+import clearEvent from '../actions/setEvent'
+
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
@@ -32,6 +34,7 @@ class EventShow extends React.Component {
   }
   handleClick(){
     if (localStorage.getItem('jwt')){
+      this.props.clearEvent()
       this.props.push(`/events/${this.props.match.params.id}/edit`)
     } else {
       alert('YOU NEED TO LOG IN FIRST')
@@ -80,6 +83,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
     setEvent,
+    clearEvent,
     push: push
   }, dispatch)
 }

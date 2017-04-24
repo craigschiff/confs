@@ -37,19 +37,19 @@ class EventEdit extends React.Component {
   componentWillReceiveProps(nextProps){
     if (this.props.showEvent.name) { return }
     let id = parseInt(nextProps.match.params.id, 10)
-    let event = this.props.events.filter(event => id === event.id)
+    let event = this.props.events.filter(event => id === event.id)[0]
     this.setState({
-      name: event[0].name,
-      description: event[0].description,
-      website: event[0].website,
-      date: event[0].date,
-      cost: event[0].cost,
-      perks: event[0].perks,
-      organizer: event[0].organizer.name,
-      city: event[0].city,
-      topic: event[0].topic.name,
-      address: event[0].address,
-      id: event[0].id
+      name: event.name,
+      description: event.description,
+      website: event.website,
+      date: event.date,
+      cost: event.cost,
+      perks: event.perks,
+      organizer: event.organizer.name,
+      city: event.city.name,
+      topic: event.topic.name,
+      address: event.address,
+      id: event.id
     })
     this.props.setEvent(event[0])
     return
@@ -73,6 +73,7 @@ class EventEdit extends React.Component {
       //   {id: createdEvent.id,
       //     submitted: true})
       this.editEvent(editedEvent)
+      this.setEvent(editedEvent)
       this.props.push(`/events/${editedEvent.id}`)
     })
     .catch((error) => {
