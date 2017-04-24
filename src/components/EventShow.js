@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginPage from './LoginPage'
 import NavbarMain from './NavbarMain'
+import Col from 'react-bootstrap/lib/Col'
+
 
 
 class EventShow extends React.Component {
@@ -18,12 +20,13 @@ class EventShow extends React.Component {
   }
   componentWillReceiveProps(nextProps){
     if (nextProps === this.props) { return }
+    debugger
     let id = parseInt(nextProps.match.params.id, 10)
     let event = this.props.events.filter(event => id == event.id)
     this.props.setEvent(event[0])
   }
   componentWillMount(){
-
+    debugger
     if (this.props.showEvent.name) { return }
 
     let id = parseInt(this.props.match.params.id, 10)
@@ -47,10 +50,10 @@ class EventShow extends React.Component {
 
     return (
       <div>
-
-        <NavbarMain />
-        <div>
-        <h1>{event.name}</h1><br />
+      <NavbarMain />
+      <Col xs={8} md={6}>
+        <div id="eventShowBio">
+        <h2>{event.name}</h2>
         <strong>Date: </strong>{event.date ? event.date.slice(0,10) : null}<br />
         <img src={event.image} /><br />
         <strong>Cost: </strong>{event.cost}<br />
@@ -58,11 +61,10 @@ class EventShow extends React.Component {
         <strong>Website: </strong><br />
         <strong>Organizer: </strong>{event.organizer ? event.organizer.name : null}<br />
         <strong>Topic: </strong>{event.topic ? event.topic.name : null}<br />
-
-
         <button onClick={this.handleClick}>Edit Event</button>
         </div>
         {this.state.needLogin ? <LoginPage path={`/events/${this.props.match.params.id}/edit`} /> : null}
+      </Col>
       </div>
     )
   }

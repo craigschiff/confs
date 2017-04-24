@@ -67,6 +67,7 @@ class EventEdit extends React.Component {
     axios
     .post(`http://localhost:3001/v1/events/${this.state.id}`, {event: params} )
     .then((response) => {
+      debugger
       let editedEvent = response.data.data.attributes
       editedEvent.id = response.data.data.id
       // this.setState(
@@ -102,6 +103,9 @@ class EventEdit extends React.Component {
 
 
   render(){
+    let organizer = this.props.showEvent.organizer
+    let city = this.props.showEvent.city
+    let topic = this.props.showEvent.topic
 
     return (
       <div>

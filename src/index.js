@@ -39,11 +39,17 @@ axios
 .then((resp) => {
     let events = resp.data.data
     let newEvent
-    events.forEach((event) => {
-      newEvent = event.attributes
-      newEvent.id = event.id
-      store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
-    })
+    for(let i = 0; i < 50; i++){
+        let event = events[i]
+        newEvent = event.attributes
+        newEvent.id = event.id
+        store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
+    }
+    // events.forEach((event) => {
+    //   newEvent = event.attributes
+    //   newEvent.id = event.id
+    //   store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
+    // })
     ReactDOM.render(
       <Provider store={store}>
         <Router history={history}>
