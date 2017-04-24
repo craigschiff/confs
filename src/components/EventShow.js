@@ -31,7 +31,7 @@ class EventShow extends React.Component {
     this.props.setEvent(event[0])
   }
   handleClick(){
-    if (sessionStorage.getItem('jwt')){
+    if (localStorage.getItem('jwt')){
       this.props.push(`/events/${this.props.match.params.id}/edit`)
     } else {
       alert('YOU NEED TO LOG IN FIRST')
@@ -52,6 +52,7 @@ class EventShow extends React.Component {
         <div>
         <h1>{event.name}</h1><br />
         <strong>Date: </strong>{event.date ? event.date.slice(0,10) : null}<br />
+        <img src={event.image} /><br />
         <strong>Cost: </strong>{event.cost}<br />
         <strong>Description: </strong>{event.description}<br />
         <strong>Website: </strong><br />
