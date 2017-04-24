@@ -27,8 +27,8 @@
 }
 
 #mainEventDiv {
-  height: 90%;
-  width: 90%;
+  height: 440px;
+  width: 100%;
 }
 
 .login {
@@ -36,7 +36,6 @@
 }
 
 #eventImg {
-  height: 90%;
   width: 90%;
 }
 #eventShowBio {

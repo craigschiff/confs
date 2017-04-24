@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginPage from './LoginPage'
 import NavbarMain from './NavbarMain'
+import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 
 
@@ -53,7 +54,9 @@ class EventShow extends React.Component {
 
     return (
       <div>
-      <NavbarMain />
+      <Row>
+        <NavbarMain />
+      </Row>
       <Col xs={8} md={6}>
         <div id="eventShowBio">
         <h2>{event.name}</h2>

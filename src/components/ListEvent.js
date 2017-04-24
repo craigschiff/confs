@@ -16,7 +16,7 @@ class ListEvent extends React.Component {
 
     return(
       <div>
-        <Col xs={6} md={4}>
+        <Col xs={6} md={4} log={6}>
           <div id="mainEventDiv">
             <h4><Link to={`/events/${event.id}`} > {event.name} </Link></h4>
             <strong>Date:</strong>{event.date ? event.date.split('T').shift().split('-').reverse().join('/') : null}<br />
