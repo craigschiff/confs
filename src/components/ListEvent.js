@@ -15,19 +15,23 @@ class ListEvent extends React.Component {
     let event = this.props.event
 
     return(
-      <Col xs={6} md={4}>
-        <Link to={`/events/${event.id}`} > {event.name} </Link><br />
-        <strong>Date:</strong>{event.date ? event.date.split('T').shift().split('-').reverse().join('/') : null}<br />
-        {event.image ? <img src={event.image} /> : null}
-        <br />
-        {event.cost}<br />
-        <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
-           {event.description}
-        </Truncate>
-        <br />
-        {event.topic ? <Link to={`/topics/${event.topic.id}`}>{event.topic.name}</Link> : null}
-        <br />
+      <div>
+        <Col xs={6} md={4}>
+          <div id="mainEventDiv">
+            <h4><Link to={`/events/${event.id}`} > {event.name} </Link></h4>
+            <strong>Date:</strong>{event.date ? event.date.split('T').shift().split('-').reverse().join('/') : null}<br />
+            {event.image ? <img id="eventImg" src={event.image} /> : null}
+            <br />
+            {event.cost}<br />
+            <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
+               {event.description}
+            </Truncate>
+            <br />
+            {event.topic ? <Link to={`/topics/${event.topic.id}`}>{event.topic.name}</Link> : null}
+            <br />
+          </div>
         </Col>
+      </div>
     )
   }
 }

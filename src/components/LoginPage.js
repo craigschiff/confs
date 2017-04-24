@@ -40,6 +40,7 @@ class LoginPage extends React.Component {
     axios
     .post('http://localhost:3001/v1/sessions', { account: params })
     .then((response) => {
+      debugger
       localStorage.setItem('jwt', response.data.jwt)
       // this.login()
       return this.redirect()

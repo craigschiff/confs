@@ -5,7 +5,6 @@
 
 .App-header {
   height: 100px;
-  padding: 10px;
   color: white;
 }
 
@@ -27,12 +26,16 @@
   font-family: 'Rubik Mono One', sans-serif;
 }
 
-.mainEventDiv {
-  height: 20%;
-  width: 20%;
-  padding 10em,10em,10em,10em;
+#mainEventDiv {
+  height: 90%;
+  width: 90%;
 }
 
 .login {
   color:grey;
+}
+
+#eventImg {
+  height: 90%;
+  width: 90%;
 }
