@@ -11,12 +11,20 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 
 class NavbarMain extends React.Component {
   // links need to be added once route is made for topics and cities
+  constructor(){
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
 
   showTopics(){
   const topicsArray =   ["Android", "Artificial Intelligence", "C", "C++", "C#", "Go", "Java", "JavaScript", "Microsoft", "Objective-C", "Perl", "Python", "PHP", "R", "Ruby", "Scratch", "Swift"]
     return topicsArray.map((topic, index) => {
     return <MenuItem key={index}><Link to={`events`} role="menuitem" >{topic}</Link></MenuItem>
     })
+  }
+  handleClick(){
+    localStorage.clear()
+    return
   }
 
   showEvents(){
@@ -45,7 +53,7 @@ class NavbarMain extends React.Component {
           <Navbar.Collapse>
             <Nav pullRight>
               <NavItem eventKey={.5} href='/about'>About</NavItem>
-              <NavItem eventKey={.5} href='/events/new'>Add Event</NavItem>
+              <NavItem eventKey={.5} href='/events/new'><Link to="/events/new">New Event </Link></NavItem>
                 <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
                   {this.showTopics()}
                 </NavDropdown>
@@ -55,7 +63,11 @@ class NavbarMain extends React.Component {
                 <NavDropdown eventKey={3} title="Or By City" id="basic-nav-dropdown-3">
                   <MenuItem>{this.showCities()}</MenuItem>
                 </NavDropdown>
-                <NavItem eventKey={4} href='/login'> <Link to="/login">Login/Sign Up </Link> </NavItem>
+                {localStorage.getItem('jwt') ?
+                <NavItem eventKey={4} href='/'> <button onClick={this.handleClick}>Logout</button> </NavItem> :
+                <NavItem eventKey={4} href='/'> <Link to="/login">Login/Sign Up </Link> </NavItem>
+              }
+
               </Nav>
           </Navbar.Collapse>
         </Navbar>
