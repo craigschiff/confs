@@ -1,11 +1,11 @@
-export default function sessionReducer(state=localStorage.getItem, action){
+export default function sessionReducer(state=localStorage.getItem('jwt'), action){
   switch (action.type) {
     case 'LOGIN':
 
-      return localStorage.getItem
+      return localStorage.getItem('jwt')
 
     case 'LOGOUT':
-      return localStorage.getItem
+      return ''
     default:
       return state
   }
