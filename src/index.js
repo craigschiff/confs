@@ -10,6 +10,8 @@ import EventShow from './components/EventShow'
 import EventEdit from './components/EventEdit'
 import TopicShow from './components/TopicShow'
 import LoginPage from './components/LoginPage'
+import AboutPage from './components/AboutPage'
+
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
@@ -49,6 +51,7 @@ axios
             <Switch>
               <Route exact path="/" component={App} />
               <Route path="/login" component={LoginPage} />
+              <Route path="/about" component={AboutPage} />
               <Route exact path="/events" component={App} />
               <Route path="/events/new" component={LoginCheck} />
               <Route path="/events/:id/edit" component={EventEdit} />
