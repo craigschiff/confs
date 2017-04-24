@@ -9,6 +9,7 @@
     "react-bootstrap": "^0.30.9",
     "react-dom": "^15.5.4",
     "react-history": "^0.18.2",
+    "react-native-web": "0.0.87",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
