@@ -12,18 +12,6 @@ class MainEvents extends React.Component {
     // this.sendEvents = this.sendEvents.bind(this)
 
   }
-  // sendEvents(){
-  //   axios
-  //   .get('http://localhost:3001/v1/events')
-  //   .then((resp) => {
-  //       let events = resp.data.data
-  //       events.forEach((event) => {
-  //         // if (!this.props.events.includes(event)) {
-  //         //   this.props.addEvents(event)
-  //         // }
-  //       })
-  //     })
-  // }
   getEvents() {
     return this.props.events.map((event, index) => {
       return <ListEvent key={index} event={event} />
@@ -32,7 +20,7 @@ class MainEvents extends React.Component {
   }
   render(){
     return (
-      <div key={5}>
+      <div>
         {this.props.events.map((event, index) => {
           return <ListEvent key={index} event={event} />
         })}
