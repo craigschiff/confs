@@ -46,7 +46,7 @@ class EventEdit extends React.Component {
       cost: event.cost,
       perks: event.perks,
       organizer: event.organizer.name,
-      city: event.city.name,
+      city: event.city,
       topic: event.topic.name,
       address: event.address,
       id: event.id
@@ -64,17 +64,17 @@ class EventEdit extends React.Component {
   handleSubmit(event){
     event.preventDefault()
     let params = this.state
+    self = this
     axios
     .post(`http://localhost:3001/v1/events/${this.state.id}`, {event: params} )
     .then((response) => {
-      debugger
       let editedEvent = response.data.data.attributes
       editedEvent.id = response.data.data.id
       // this.setState(
       //   {id: createdEvent.id,
       //     submitted: true})
       this.editEvent(editedEvent)
-      this.setEvent(editedEvent)
+      this.props.setEvent(editedEvent)
       this.props.push(`/events/${editedEvent.id}`)
     })
     .catch((error) => {

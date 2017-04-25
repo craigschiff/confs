@@ -39,17 +39,27 @@ axios
 .then((resp) => {
     let events = resp.data.data
     let newEvent
-    for(let i = 0; i < 50; i++){
-        let event = events[i]
-        newEvent = event.attributes
-        newEvent.id = event.id
-        store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
-    }
-    // events.forEach((event) => {
-    //   newEvent = event.attributes
-    //   newEvent.id = event.id
-    //   store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
-    // })
+    let topicIds = []
+    let topic
+    // for(let i = 0; i < 50; i++){
+    //     let event = events[i]
+    //     newEvent = event.attributes
+    //     newEvent.id = event.id
+    //     store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
+    // }
+    events.forEach((event) => {
+      newEvent = event.attributes
+      newEvent.id = event.id
+      topic = event.attributes.topic
+      if (!topicIds.includes(topic.id)){
+        topicIds.push(topic.id)
+        store.dispatch({type: "RECEIVE_TOPIC", topic: topic})
+        return
+      }
+      newEvent.city = event.relationships.city.data
+      newEvent.organizer = event.relationships.organizer.data
+      store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
+    })
     ReactDOM.render(
       <Provider store={store}>
         <Router history={history}>
@@ -72,16 +82,18 @@ axios
 // axios
 // .post('http://localhost:3001/v1/username=dison')
 //
-axios
-.get('http://localhost:3001/v1/topics')
-.then((resp) => {
-    let topics = resp.data.data
-    let newTopic
-    topics.forEach((topic) => {
-      newTopic = topic.attributes
-      newTopic.id = topic.id
-      newTopic.events = [] //plucking event ID out of events association
-      topic.relationships.events.data.forEach(event => newTopic.events.push(event.id))
-      store.dispatch({type: "RECEIVE_TOPIC", payload: newTopic})
-    })
-  })
+// axios
+// .get('http://localhost:3001/v1/topics')
+// .then((resp) => {
+//     debugger
+//     let topics = resp.data.data
+//     let newTopic
+//     topics.forEach((topic) => {
+//       debugger
+//       newTopic = topic.attributes
+//       newTopic.id = topic.id
+//       newTopic.events = [] //plucking event ID out of events association
+//       topic.relationships.events.data.forEach(event => newTopic.events.push(event.id))
+//       store.dispatch({type: "RECEIVE_TOPIC", payload: newTopic})
+//     })
+//   })

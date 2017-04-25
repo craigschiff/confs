@@ -29,8 +29,7 @@ class TopicShow extends React.Component {
     let topic = this.props.topics.filter(topic => id == topic.id)[0]
     this.setState({ topic })
 
-    let topicEventIds = topic.events
-    let events = this.props.events.filter(event => topicEventIds.includes(event.id) )
+    let events = this.props.events.filter(event => event.topic.id == topic.id)
     this.setState({ events })
     // this.props.setTopic(topic[0])
 
@@ -41,13 +40,11 @@ class TopicShow extends React.Component {
     let id = parseInt(this.props.match.params.id, 10)
     let topic = this.props.topics.filter(topic => id == topic.id)[0]
     this.setState({ topic: topic })
-    let topicEventIds = topic.events
-    let events = this.props.events.filter(event => topicEventIds.includes(event.id) )
+    let events = this.props.events.filter(event => event.topic.id == topic.id)
     this.setState({ events })
   }
   showEvents(){
     return this.state.events.forEach((event) => {
-      debugger
       return <ListEvent key={event.id} event={event}/>
     })
 
@@ -57,7 +54,7 @@ class TopicShow extends React.Component {
     // {this.state.events[0]
     // ? this.state.events.forEach(event => <ListEvent event={event} />)
     // : null}
-    
+
     return (
       <div>
         <NavbarMain />
