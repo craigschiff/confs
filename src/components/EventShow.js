@@ -23,13 +23,11 @@ class EventShow extends React.Component {
   }
   componentWillReceiveProps(nextProps){
     if (nextProps === this.props) { return }
-    debugger
     let id = parseInt(nextProps.match.params.id, 10)
     let event = this.props.events.filter(event => id == event.id)
     this.props.setEvent(event[0])
   }
   componentWillMount(){
-    debugger
     if (this.props.showEvent.name) { return }
 
     let id = parseInt(this.props.match.params.id, 10)
@@ -62,9 +60,9 @@ class EventShow extends React.Component {
         <h2>{event.name}</h2>
         <strong>Date: </strong>{event.date ? event.date.slice(0,10) : null}<br />
         <img src={event.image} /><br />
-        <strong>Cost: </strong>{event.cost}<br />
+        {event.cost ? <strong>Cost: </strong> : null}{event.cost}<br />
         <strong>Description: </strong>{event.description}<br />
-        <strong>Website: </strong><br />
+        {event.cost ? <strong>Website: </strong> : null}<br />
         <strong>Organizer: </strong>{event.organizer ? event.organizer.name : null}<br />
         <strong>Topic: </strong>{event.topic ? event.topic.name : null}<br />
         <button onClick={this.handleClick}>Edit Event</button>

@@ -23,9 +23,18 @@ class NavbarMain extends React.Component {
   }
 
   showTopics(){
-  const topicsArray =   ["Android", "Artificial Intelligence", "C", "C++", "C#", "Go", "Java", "JavaScript", "Microsoft", "Objective-C", "Perl", "Python", "PHP", "R", "Ruby", "Scratch", "Swift"]
-    return topicsArray.map((topic, index) => {
-    return <MenuItem key={index}><Link to={`events`} role="menuitem" >{topic}</Link></MenuItem>
+    // debugger
+    // let topics = []
+    // let topic
+    // this.props.events.forEach((event) => {
+    //   topic = event.topic
+    //
+    //   if (!topics.includes(topic)){
+    //     topics.push(topic)
+    //   }
+    // })
+  return this.props.topics.map((topic) => {
+    return <MenuItem key={topic.id}><Link to={`/topics/${topic.id}`} role="menuitem" >{topic.name}</Link></MenuItem>
     })
   }
   handleClick(){
@@ -64,12 +73,6 @@ class NavbarMain extends React.Component {
                 <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
                   {this.showTopics()}
                 </NavDropdown>
-                <NavDropdown eventKey={2} title="Or By Organizer" id="basic-nav-dropdown-2">
-                  <MenuItem>{this.showEvents()}</MenuItem>
-                </NavDropdown>
-                <NavDropdown eventKey={3} title="Or By City" id="basic-nav-dropdown-3">
-                  <MenuItem>{this.showCities()}</MenuItem>
-                </NavDropdown>
                 {localStorage.getItem('jwt') ?
                 <NavItem eventKey={4} href='/'> <button onClick={this.handleClick}>Logout</button> </NavItem> :
                 <NavItem eventKey={4} href='/'> <Link to="/login">Login/Sign Up </Link> </NavItem>
@@ -96,3 +99,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarMain)
+
+// <NavDropdown eventKey={2} title="Or By Organizer" id="basic-nav-dropdown-2">
+//   <MenuItem>{this.showEvents()}</MenuItem>
+// </NavDropdown>
+// <NavDropdown eventKey={3} title="Or By City" id="basic-nav-dropdown-3">
+//   <MenuItem>{this.showCities()}</MenuItem>
+// </NavDropdown>
+//

@@ -49,7 +49,7 @@ class NewEvent extends React.Component {
       // this.setState(
       //   {id: createdEvent.id,
       //     submitted: true})
-      this.addEvent(createdEvent)
+      this.props.addEvent(createdEvent)
       this.props.push(`/events/${createdEvent.id}`)
     })
     .catch((error) => {
@@ -117,7 +117,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    addEvent: addEvent,
-    push: push
+    addEvent,
+    push
   }, dispatch)
 }
