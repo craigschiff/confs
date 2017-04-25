@@ -65,8 +65,7 @@ class EventShow extends React.Component {
         {event.cost ? <strong>Website: </strong> : null}<br />
         <strong>Organizer: </strong>{event.organizer ? event.organizer.name : null}<br />
         <strong>Topic: </strong>{event.topic ? event.topic.name : null}<br />
-        <buts
-        ton onClick={this.handleClick}>Edit Event</button>
+        <button onClick={this.handleClick}>Edit Event</button>
         </div>
         {this.state.needLogin ? <LoginPage path={`/events/${this.props.match.params.id}/edit`} /> : null}
       </Col>
