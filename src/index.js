@@ -34,54 +34,55 @@ const store = createStore(
   applyMiddleware(thunk, rMiddleware)
 )
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <div>
-        <Switch>
-          <Route exact path="/" component={App} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/about" component={AboutPage} />
-          <Route exact path="/events" component={App} />
-          <Route path="/events/new" component={LoginCheck} />
-          <Route path="/events/:id/edit" component={EventEdit} />
-          <Route exact path="/events/:id" component={EventShow} />
-          <Route path="/topics/:id" component={TopicShow} />
-        </Switch>
-      </div>
-    </Router>
-  </Provider>, document.getElementById('container')
-);
-
-store.subscribe(() => {
-  console.log("Some one dispatched a thing", store.getState())
-})
-const getEvents = () => {
-  return (dispatch) => {
-  axios
-  .get('http://localhost:3001/v1/events')
-  .then((resp) => {
-      let events = resp.data.data
-      let newEvent
-      let topicIds = []
-      let topic
-      let map = events.reduce((map, event) => {
+axios
+.get('http://localhost:3001/v1/events')
+.then((resp) => {
+    let events = resp.data.data
+    let newEvent
+    for(let i = 0; i < 50; i++){
+        let event = events[i]
         newEvent = event.attributes
         newEvent.id = event.id
-        topic = event.attributes.topic
-        if (!topicIds.includes(topic.id)){
-          topicIds.push(topic.id)
-          map.topics.push(topic)
-        }
-        newEvent.city = event.relationships.city.data
-        newEvent.organizer = event.relationships.organizer.data
-        map.events.push(newEvent)
-        return map
-      }, {events:[], topics: []})
-      dispatch({type: "RECEIVE_TOPICS", payload: map.topics})
-      dispatch({type: "RECEIVE_EVENTS", payload: map.events})
-    })
-  }
-}
+        store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
+    }
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router history={history}>
+          <div>
+            <Switch>
+              <Route exact path="/" component={App} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/about" component={AboutPage} />
+              <Route exact path="/events" component={App} />
+              <Route path="/events/new" component={LoginCheck} />
+              <Route path="/events/:id/edit" component={EventEdit} />
+              <Route exact path="/events/:id" component={EventShow} />
+              <Route path="/topics/:id" component={TopicShow} />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>, document.getElementById('container')
+    );
 
-store.dispatch(getEvents())
+  })
+    // events.forEach((event) => {
+    //   newEvent = event.attributes
+    //   newEvent.id = event.id
+    //   store.dispatch({type: "RECEIVE_EVENT", payload: newEvent})
+    // })
+// axios
+// .post('http://localhost:3001/v1/username=dison')
+//
+axios
+.get('http://localhost:3001/v1/topics')
+.then((resp) => {
+    let topics = resp.data.data
+    let newTopic
+    topics.forEach((topic) => {
+      newTopic = topic.attributes
+      newTopic.id = topic.id
+      newTopic.events = [] //plucking event ID out of events association
+      topic.relationships.events.data.forEach(event => newTopic.events.push(event.id))
+      store.dispatch({type: "RECEIVE_TOPIC", payload: newTopic})
+    })
+  })
