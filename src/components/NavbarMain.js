@@ -18,9 +18,6 @@ class NavbarMain extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  shouldComponentUpdate(){
-
-  }
 
   showTopics(){
     // debugger
