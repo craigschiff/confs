@@ -1,7 +1,7 @@
 import React from 'react';
 import setEvent from '../actions/setEvent'
 import clearEvent from '../actions/setEvent'
-
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
@@ -29,10 +29,14 @@ class EventShow extends React.Component {
   }
   componentWillMount(){
     if (this.props.showEvent.name) { return }
-
     let id = parseInt(this.props.match.params.id, 10)
-    let event = this.props.events.filter(event => id == event.id)
-    this.props.setEvent(event[0])
+    axios
+    .get(`http://localhost:3001/v1/events/${id}`)
+    .then((resp) => {
+      let event = resp.data.data.attributes
+      event.id = resp.data.data.id
+      this.props.setEvent(event)
+    })
   }
   handleClick(){
     if (localStorage.getItem('jwt')){

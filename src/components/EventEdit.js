@@ -14,18 +14,35 @@ import NavbarMain from '../components/NavbarMain'
 class EventEdit extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      name: props.showEvent.name,
-      description: props.showEvent.description,
-      website: props.showEvent.website,
-      date: props.showEvent.date,
-      cost: props.showEvent.cost,
-      perks: props.showEvent.perks,
-      organizer: props.showEvent.organizer,
-      city: props.showEvent.city,
-      topic: props.showEvent.topic,
-      address: props.showEvent.address,
-      id: props.showEvent.id
+    if (props.showEvent.topic){
+      this.state = {
+        name: props.showEvent.name,
+        description: props.showEvent.description,
+        website: props.showEvent.website,
+        date: props.showEvent.date,
+        cost: props.showEvent.cost,
+        perks: props.showEvent.perks,
+        organizer: props.showEvent.organizer,
+        city: props.showEvent.city,
+        topic: props.showEvent.topic.name,
+        address: props.showEvent.address,
+        id: props.showEvent.id
+        }
+      }else {
+        this.state = {
+          name: props.showEvent.name,
+          description: props.showEvent.description,
+          website: props.showEvent.website,
+          date: props.showEvent.date,
+          cost: props.showEvent.cost,
+          perks: props.showEvent.perks,
+          organizer: props.showEvent.organizer,
+          city: props.showEvent.city,
+          topic: props.showEvent.topic,
+          address: props.showEvent.address,
+          id: props.showEvent.id
+      }
+
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -37,41 +54,54 @@ class EventEdit extends React.Component {
   componentWillReceiveProps(nextProps){
     if (this.props.showEvent.name) { return }
     let id = parseInt(nextProps.match.params.id, 10)
-    let event = this.props.events.filter(event => id === event.id)[0]
-    this.setState({
-      name: event.name,
-      description: event.description,
-      website: event.website,
-      date: event.date,
-      cost: event.cost,
-      perks: event.perks,
-      organizer: event.organizer,
-      city: event.city,
-      topic: event.topic.name,
-      address: event.address,
-      id: event.id
-    })
-    this.props.setEvent(event[0])
-    return
-  }
+    axios
+    .get(`http://localhost:3001/v1/events/${id}`)
+    .then((resp) => {
+      let event = resp.data.data.attributes
+      event.id = resp.data.data.id
+      this.props.setEvent(event)
+      this.setState({topic: event.topic.name})
+      })
+      return
+    }
+  //   this.setState({
+  //     name: event.name,
+  //     description: event.description,
+  //     website: event.website,
+  //     date: event.date,
+  //     cost: event.cost,
+  //     perks: event.perks,
+  //     topic: event.topic,
+  //     address: event.address,
+  //     id: event.id
+  //   })
+  //   this.props.setEvent(event[0])
+  //   return
+  // }
   componentWillMount(){
     if (this.props.showEvent.name) { return }
     let id = parseInt(this.props.match.params.id, 10)
-    let event = this.props.events.filter(event => id === event.id)[0]
-    this.setState({
-      name: event.name,
-      description: event.description,
-      website: event.website,
-      date: event.date,
-      cost: event.cost,
-      perks: event.perks,
-      organizer: event.organizer.name,
-      city: event.city,
-      topic: event.topic.name,
-      address: event.address,
-      id: event.id
+    axios
+    .get(`http://localhost:3001/v1/events/${id}`)
+    .then((resp) => {
+
+      let event = resp.data.data.attributes
+      event.id = resp.data.data.id
+      this.props.setEvent(event)
+      debugger
+      this.setState({
+        name: event.name,
+        description: event.description,
+        website: event.website,
+        date: event.date,
+        cost: event.cost,
+        perks: event.perks,
+        topic: event.topic.name,
+        address: event.address,
+        id: event.id
+      })
     })
-    this.props.setEvent(event[0])
+
     return
   }
 
@@ -133,17 +163,17 @@ class EventEdit extends React.Component {
           <input name="date" type="text" value={this.state.date} onChange={this.handleOnChange} placeholder="Enter Date" /><br />
           <input name="cost" type='text' value={this.state.cost} onChange={this.handleOnChange} placeholder="Event Cost" /><br />
           <textarea name="perks" type='text' value={this.state.perks} onChange={this.handleOnChange} placeholder="Presenter Perks" /><br />
-          <input name="organizer" type='text' value={this.state.organizer.name} onChange={this.handleOnChange} placeholder="Organizer" /><br />
-          <input name="city" type='text' value={this.state.city.name} onChange={this.handleOnChange} placeholder="City" /><br />
           <input name="address" type='text' value={this.state.address} onChange={this.handleOnChange} placeholder="Address" /><br />
+          <label>Topic: </label>
           <ButtonGroup vertical>
-          <DropdownButton title={this.setTopic} id="bg-vertical-dropdown-1" onSelect={this.handleSelect}>
+          <DropdownButton title={this.setTopic} value={this.state.topic} id="bg-vertical-dropdown-1" onSelect={this.handleSelect}>
             {this.showTopics()}
           </DropdownButton>
           </ButtonGroup>
           <br />
           <label>Or if not listed enter new topic below</label><br />
-          <input name="topic" type='text' value={this.state.topic.name} onChange={this.handleOnChange} placeholder="Topic" /><br />
+          <input name="topic" type='text' value={this.state.topic} onChange={this.handleOnChange} placeholder="Topic" /><br />
+
           <input type='submit' value="Submit Conference" /><br />
         </form>
       </div>
