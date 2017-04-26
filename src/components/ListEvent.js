@@ -14,15 +14,10 @@ class ListEvent extends React.Component {
           <div id="mainEventDiv">
             <h4><Link to={`/events/${event.id}`} > {event.name} </Link></h4>
             <strong>Date:</strong>{event.date ? event.date.split('T').shift().split('-').reverse().join('/') : null}<br />
-            {event.image ? <img id="eventImg" src={event.image} /> : null}
+            <img id="eventImg" src={event.image} />
             <br />
             {event.cost}<br />
-            <TextTruncate
-              line={5}
-              truncateText="…"
-              text={event.description}
-              textTruncateChild={<a href="#">Read on</a>}
-            />
+          {event.description.slice(0, 200)}...
             <br />
             {event.topic ? <Link to={`/topics/${event.topic.id}`}>{event.topic.name}</Link> : null}
             <br />
@@ -32,6 +27,11 @@ class ListEvent extends React.Component {
     )
   }
 }
-
+// <TextTruncate
+//   line={5}
+//   truncateText="…"
+//   text={event.description}
+//   textTruncateChild={<a href="#">Read on</a>}
+// />
 
 export default ListEvent
