@@ -53,9 +53,6 @@ ReactDOM.render(
   </Provider>, document.getElementById('container')
 );
 
-store.subscribe(() => {
-  console.log("Some one dispatched a thing", store.getState())
-})
 const getEvents = () => {
   return (dispatch) => {
   axios

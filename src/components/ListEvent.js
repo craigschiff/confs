@@ -17,9 +17,6 @@ class ListEvent extends React.Component {
             {event.image ? <img id="eventImg" src={event.image} /> : null}
             <br />
             {event.cost}<br />
-            <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
-               {event.description}
-            </Truncate>
             <br />
             {event.topic ? <Link to={`/topics/${event.topic.id}`}>{event.topic.name}</Link> : null}
             <br />
@@ -32,3 +29,7 @@ class ListEvent extends React.Component {
 
 
 export default ListEvent
+
+// <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
+//    {event.description}
+// </Truncate>
