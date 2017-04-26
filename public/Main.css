@@ -13,7 +13,7 @@
 
 #Navbar {
   background-color: #3b5998;
-  color: grey;
+  color: #e6e6e6;
 }
 
 #Navbar:link {
@@ -50,6 +50,8 @@
 #eventShowImg {
   width: 90%;
 }
+
+#
 
 #bioText {
   text-align: center;

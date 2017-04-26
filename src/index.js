@@ -55,7 +55,7 @@ ReactDOM.render(
 const getEvents = () => {
   return (dispatch) => {
   axios
-  .get('http://localhost:3001/v1/events')
+  .get('https://devconfs-api.herokuapp.com/v1/events')
   .then((resp) => {
       let events = resp.data.data
       let newEvent

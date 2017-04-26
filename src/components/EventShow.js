@@ -30,7 +30,7 @@ class EventShow extends React.Component {
     if (nextProps.showEvent.name) { return }
     let id = parseInt(nextProps.match.params.id, 10)
     axios
-    .get(`http://localhost:3001/v1/events/${id}`)
+    .get(`https://devconfs-api.herokuapp.com/v1/events/${id}`)
     .then((resp) => {
       let event = resp.data.data.attributes
       event.id = resp.data.data.id
@@ -41,7 +41,7 @@ class EventShow extends React.Component {
     if (this.props.showEvent.name) { return }
     let id = parseInt(this.props.match.params.id, 10)
     axios
-    .get(`http://localhost:3001/v1/events/${id}`)
+    .get(`https://devconfs-api.herokuapp.com/v1/events/${id}`)
     .then((resp) => {
       let event = resp.data.data.attributes
       event.id = resp.data.data.id
@@ -73,7 +73,7 @@ class EventShow extends React.Component {
     let params = {name: this.state.name, content: this.state.comment}
     this.setState({comment: ''})
     axios
-    .post(`http://localhost:3001/v1/events/${this.props.match.params.id}/comments`, params )
+    .post(`https://devconfs-api.herokuapp.com/v1/events/${this.props.match.params.id}/comments`, params )
     .then((resp) => {
       console.log(this.props)
       let comment = resp.data.data
