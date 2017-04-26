@@ -35,3 +35,7 @@ class ListEvent extends React.Component {
 
 
 export default ListEvent
+
+// <Truncate lines={6} ellipsis={<Link to={`/events/${event.id}`}>...<br/>  Read more...</Link>}>
+//    {event.description}
+// </Truncate>

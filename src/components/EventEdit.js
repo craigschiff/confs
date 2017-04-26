@@ -45,7 +45,7 @@ class EventEdit extends React.Component {
       date: event.date,
       cost: event.cost,
       perks: event.perks,
-      organizer: event.organizer.name,
+      organizer: event.organizer,
       city: event.city,
       topic: event.topic.name,
       address: event.address,
@@ -57,8 +57,22 @@ class EventEdit extends React.Component {
   componentWillMount(){
     if (this.props.showEvent.name) { return }
     let id = parseInt(this.props.match.params.id, 10)
-    let event = this.props.events.filter(event => id === event.id)
+    let event = this.props.events.filter(event => id === event.id)[0]
+    this.setState({
+      name: event.name,
+      description: event.description,
+      website: event.website,
+      date: event.date,
+      cost: event.cost,
+      perks: event.perks,
+      organizer: event.organizer.name,
+      city: event.city,
+      topic: event.topic.name,
+      address: event.address,
+      id: event.id
+    })
     this.props.setEvent(event[0])
+    return
   }
 
   handleSubmit(event){
