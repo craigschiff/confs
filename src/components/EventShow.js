@@ -1,6 +1,7 @@
 import React from 'react';
 import setEvent from '../actions/setEvent'
 import clearEvent from '../actions/setEvent'
+import editEvent from '../actions/editEvent'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
@@ -27,10 +28,15 @@ class EventShow extends React.Component {
     this.showComments = this.showComments.bind(this)
   }
   componentWillReceiveProps(nextProps){
-    if (nextProps === this.props) { return }
+    if (nextProps.showEvent.name) { return }
     let id = parseInt(nextProps.match.params.id, 10)
-    let event = this.props.events.filter(event => id == event.id)
-    this.props.setEvent(event[0])
+    axios
+    .get(`http://localhost:3001/v1/events/${id}`)
+    .then((resp) => {
+      let event = resp.data.data.attributes
+      event.id = resp.data.data.id
+      this.props.setEvent(event)
+    })
   }
   componentWillMount(){
     if (this.props.showEvent.name) { return }
@@ -54,11 +60,11 @@ class EventShow extends React.Component {
     }
   }
   showComments(){
-    this.props.showEvent.comments.forEach((comment) => {
+    return this.props.showEvent.comments.map((comment) => {
       return (
         <div>
-          <h6>{comment.name}</h6><br />
-          <p>{comment.content}</p><br />
+          <h6>Name: {comment.name}</h6><br />
+          <p>Content: {comment.content}</p><br />
         </div>
       )
     })
@@ -70,7 +76,13 @@ class EventShow extends React.Component {
     axios
     .post(`http://localhost:3001/v1/events/${this.props.match.params.id}/comments`, params )
     .then((resp) => {
-      debugger
+      console.log(this.props)
+      let comment = resp.data.data
+      let newComment = comment.attributes
+      newComment.id = comment.id
+      let currentEvent = this.props.showEvent
+      currentEvent.comments.push(newComment)
+      this.props.editEvent(currentEvent)
     })
   }
   onChange(event){
@@ -110,7 +122,7 @@ class EventShow extends React.Component {
             <input type='text' name='name' value={this.state.name} onChange={this.onChange} placeholder='your name' /><br />
             <textarea value={this.state.comment} onChange={this.onChange} name='comment' placeholder='enter comment!' /><br />
             <input type='submit' value='submit' />
-            {this.props.comments && this.props.comments.length >0 ? this.showComments() : null}
+            {event.comments && event.comments.length >0 ? this.showComments() : null}
           </form>
         </div>
       </Col>
@@ -132,6 +144,7 @@ function mapDispatchToProps (dispatch) {
   return bindActionCreators({
     setEvent,
     clearEvent,
+    editEvent,
     push: push
   }, dispatch)
 }

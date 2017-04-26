@@ -9,7 +9,6 @@ class MainEvents extends React.Component {
   constructor() {
     super()
     this.getEvents = this.getEvents.bind(this)
-    // this.sendEvents = this.sendEvents.bind(this)
 
   }
   getEvents() {
