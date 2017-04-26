@@ -18,7 +18,6 @@ class NavbarMain extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-
   showTopics(){
     // debugger
     // let topics = []
@@ -65,7 +64,8 @@ class NavbarMain extends React.Component {
           <Search />
           <Navbar.Collapse>
             <Nav pullRight>
-              <NavItem eventKey={.5} href='/'><Link to="/about">About</Link></NavItem>
+              <NavItem> <Link to="/events">Home </Link></NavItem>
+              <NavItem eventKey={.5} ><Link to="/about">About</Link></NavItem>
               <NavItem eventKey={.5} href='/events/new'><Link to="/events/new">New Event </Link></NavItem>
                 <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
                   {this.showTopics()}

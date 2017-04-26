@@ -2,7 +2,6 @@
   text-align: center;
 }
 
-
 .App-header {
   height: 100px;
   color: white;
@@ -32,7 +31,7 @@
 }
 
 #mainEventDiv {
-  height: 440px;
+  height: 450px;
   width: 100%;
 }
 
@@ -54,4 +53,9 @@
 
 #bioText {
   text-align: center;
+}
+
+.comments{
+  color: #3b5998;
+  background-color: grey;
 }

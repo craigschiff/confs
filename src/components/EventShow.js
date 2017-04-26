@@ -9,8 +9,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginPage from './LoginPage'
 import NavbarMain from './NavbarMain'
-import Row from 'react-bootstrap/lib/Row'
-import Col from 'react-bootstrap/lib/Col'
+import {Row, Col, Grid} from 'react-bootstrap'
 
 
 
@@ -63,8 +62,8 @@ class EventShow extends React.Component {
     return this.props.showEvent.comments.map((comment) => {
       return (
         <div>
-          <h6>Name: {comment.name}</h6><br />
-          <p>Content: {comment.content}</p><br />
+          <h5>{comment.content}</h5>
+          <h6>-{comment.name}</h6>
         </div>
       )
     })
@@ -97,7 +96,7 @@ class EventShow extends React.Component {
     let event = this.props.showEvent
 
     return (
-      <div>
+      <Grid>
       <Row>
         <NavbarMain />
       </Row>
@@ -115,18 +114,19 @@ class EventShow extends React.Component {
         </div>
         {this.state.needLogin ? <LoginPage path={`/events/${this.props.match.params.id}/edit`} /> : null}
       </Col>
-      <Col xs={4} md={6}>
+      <Col xs={3} md={5}>
         <div className='comments'>
-          <h4>COMMENTS!</h4>
+          <h4>Comments:</h4>
+          {event.comments && event.comments.length >0 ? this.showComments() : null}
           <form onSubmit={this.handleSubmit}>
-            <input type='text' name='name' value={this.state.name} onChange={this.onChange} placeholder='your name' /><br />
-            <textarea value={this.state.comment} onChange={this.onChange} name='comment' placeholder='enter comment!' /><br />
+            Name:<br/><input type='text' name='name' value={this.state.name} onChange={this.onChange} placeholder='your name' /><br />
+            Comment:<br/><textarea value={this.state.comment} onChange={this.onChange} name='comment' placeholder='enter comment!' /><br />
             <input type='submit' value='submit' />
-            {event.comments && event.comments.length >0 ? this.showComments() : null}
+
           </form>
         </div>
       </Col>
-      </div>
+      </Grid>
     )
   }
 }
