@@ -1,9 +1,6 @@
 import React from 'react';
 import NavbarMain from './NavbarMain'
-import TopicList from './TopicList'
-// import setTopic from '../actions/setTopic'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
 import ListEvent from './ListEvent'
 
 
@@ -15,45 +12,32 @@ class TopicShow extends React.Component {
       topic: {},
       events: []
     }
-    // this.showEvents = this.showEvents.bind(this)
+    this.setTopicAndEvent = this.setTopicAndEvent.bind(this)
   }
 
-  // getTopicsEvents(){
-  //
-  // }
 
   componentWillReceiveProps(nextProps){
     if (nextProps === this.props) { return }
 
     let id = parseInt(nextProps.match.params.id, 10)
-    let topic = this.props.topics.filter(topic => id == topic.id)[0]
-    this.setState({ topic })
-
-    let events = this.props.events.filter(event => event.topic.id == topic.id)
-    this.setState({ events })
-    // this.props.setTopic(topic[0])
+    this.setTopicAndEvent(id)
 
   }
   componentWillMount(){
     if (this.props.showTopic) { return }
 
     let id = parseInt(this.props.match.params.id, 10)
+    this.setTopicAndEvent(id)
+  }
+  setTopicAndEvent(id){
     let topic = this.props.topics.filter(topic => id == topic.id)[0]
-    this.setState({ topic: topic })
+    this.setState({ topic })
     let events = this.props.events.filter(event => event.topic.id == topic.id)
     this.setState({ events })
-  }
-  showEvents(){
-    return this.state.events.forEach((event) => {
-      return <ListEvent key={event.id} event={event}/>
-    })
 
   }
 
   render(){
-    // {this.state.events[0]
-    // ? this.state.events.forEach(event => <ListEvent event={event} />)
-    // : null}
 
     return (
       <div>

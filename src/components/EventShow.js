@@ -3,7 +3,6 @@ import setEvent from '../actions/setEvent'
 import clearEvent from '../actions/setEvent'
 import editEvent from '../actions/editEvent'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -23,6 +22,7 @@ class EventShow extends React.Component {
       comment: '',
       name: ''
     }
+    this.eventData = this.eventData.bind(this)
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.showComments = this.showComments.bind(this)
@@ -30,6 +30,9 @@ class EventShow extends React.Component {
   componentWillReceiveProps(nextProps){
     if (nextProps.showEvent.name) { return }
     let id = parseInt(nextProps.match.params.id, 10)
+    this.eventData(id)
+  }
+  eventData(id){
     axios
     .get(`http://localhost:3001/v1/events/${id}`)
     .then((resp) => {
@@ -41,13 +44,7 @@ class EventShow extends React.Component {
   componentWillMount(){
     if (this.props.showEvent.name) { return }
     let id = parseInt(this.props.match.params.id, 10)
-    axios
-    .get(`http://localhost:3001/v1/events/${id}`)
-    .then((resp) => {
-      let event = resp.data.data.attributes
-      event.id = resp.data.data.id
-      this.props.setEvent(event)
-    })
+    this.eventData(id)
   }
   handleClick(){
     if (localStorage.getItem('jwt')){
@@ -56,7 +53,6 @@ class EventShow extends React.Component {
     } else {
       alert('YOU NEED TO LOG IN FIRST')
       this.setState({needLogin: true})
-      // this.props.push('/login')
     }
   }
   showComments(){
@@ -88,7 +84,7 @@ class EventShow extends React.Component {
   onChange(event){
     let key = event.target.name
     let value = event.target.value
-    this.setState({[key]: event.target.value})
+    this.setState({[key]: value})
   }
 
 
@@ -105,7 +101,7 @@ class EventShow extends React.Component {
         <div id="eventShowBio">
         <h2>{event.name}</h2>
         <strong>Date: </strong>{event.date ? event.date.slice(0,10) : null}<br />
-        <img src={event.image} /><br />
+        <img src={event.image} alt='' /><br />
         {event.cost ? <strong>Cost: </strong> : null}{event.cost}<br />
         <strong>Description: </strong>{event.description}<br />
         {event.cost ? <strong>Website: </strong> : null}<br />

@@ -46,9 +46,8 @@ class LoginPage extends React.Component {
       return this.redirect()
     })
     .catch((error) => {
-      throw(error)
       alert('USERNAME / PASSWORD NOT VALID')
-
+      throw(error)
     })
   }
   handleSignUp(event){
@@ -63,8 +62,8 @@ class LoginPage extends React.Component {
       return this.redirect()
     })
     .catch((error) => {
-      throw(error)
       alert('TRY AGAIN SUCKER')
+      throw(error)
     })
   }
 
