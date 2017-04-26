@@ -18,8 +18,13 @@ class EventShow extends React.Component {
     super()
     this.handleClick = this.handleClick.bind(this)
     this.state = {
-      needLogin: false
+      needLogin: false,
+      comment: '',
+      name: ''
     }
+    this.onChange = this.onChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.showComments = this.showComments.bind(this)
   }
   componentWillReceiveProps(nextProps){
     if (nextProps === this.props) { return }
@@ -48,6 +53,31 @@ class EventShow extends React.Component {
       // this.props.push('/login')
     }
   }
+  showComments(){
+    this.props.showEvent.comments.forEach((comment) => {
+      return (
+        <div>
+          <h6>{comment.name}</h6><br />
+          <p>{comment.content}</p><br />
+        </div>
+      )
+    })
+  }
+  handleSubmit(event){
+    event.preventDefault()
+    let params = {name: this.state.name, content: this.state.comment}
+    this.setState({comment: ''})
+    axios
+    .post(`http://localhost:3001/v1/events/${this.props.match.params.id}/comments`, params )
+    .then((resp) => {
+      debugger
+    })
+  }
+  onChange(event){
+    let key = event.target.name
+    let value = event.target.value
+    this.setState({[key]: event.target.value})
+  }
 
 
   render(){
@@ -72,6 +102,17 @@ class EventShow extends React.Component {
         <button onClick={this.handleClick}>Edit Event</button>
         </div>
         {this.state.needLogin ? <LoginPage path={`/events/${this.props.match.params.id}/edit`} /> : null}
+      </Col>
+      <Col xs={4} md={6}>
+        <div className='comments'>
+          <h4>COMMENTS!</h4>
+          <form onSubmit={this.handleSubmit}>
+            <input type='text' name='name' value={this.state.name} onChange={this.onChange} placeholder='your name' /><br />
+            <textarea value={this.state.comment} onChange={this.onChange} name='comment' placeholder='enter comment!' /><br />
+            <input type='submit' value='submit' />
+            {this.props.comments && this.props.comments.length >0 ? this.showComments() : null}
+          </form>
+        </div>
       </Col>
       </div>
     )

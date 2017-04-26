@@ -17,7 +17,7 @@ class ListEvent extends React.Component {
             <img id="eventImg" src={event.image} />
             <br />
             {event.cost}<br />
-          {event.description.slice(0, 200)}...
+          {event.description.slice(0, 200)}...<Link to={`/events/${event.id}`}>See More</Link>
             <br />
             {event.topic ? <Link to={`/topics/${event.topic.id}`}>{event.topic.name}</Link> : null}
             <br />
