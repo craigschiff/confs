@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import Col from 'react-bootstrap/lib/Col'
-import Truncate from 'react-truncate';
+import TextTruncate from 'react-text-truncate';
 
 
 class ListEvent extends React.Component {
@@ -17,6 +17,12 @@ class ListEvent extends React.Component {
             {event.image ? <img id="eventImg" src={event.image} /> : null}
             <br />
             {event.cost}<br />
+            <TextTruncate
+              line={5}
+              truncateText="…"
+              text={event.description}
+              textTruncateChild={<a href="#">Read on</a>}
+            />
             <br />
             {event.topic ? <Link to={`/topics/${event.topic.id}`}>{event.topic.name}</Link> : null}
             <br />

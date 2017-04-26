@@ -133,8 +133,8 @@ class EventEdit extends React.Component {
           <input name="date" type="text" value={this.state.date} onChange={this.handleOnChange} placeholder="Enter Date" /><br />
           <input name="cost" type='text' value={this.state.cost} onChange={this.handleOnChange} placeholder="Event Cost" /><br />
           <textarea name="perks" type='text' value={this.state.perks} onChange={this.handleOnChange} placeholder="Presenter Perks" /><br />
-          <input name="organizer" type='text' value={this.state.organizer} onChange={this.handleOnChange} placeholder="Organizer" /><br />
-          <input name="city" type='text' value={this.state.city} onChange={this.handleOnChange} placeholder="City" /><br />
+          <input name="organizer" type='text' value={this.state.organizer.name} onChange={this.handleOnChange} placeholder="Organizer" /><br />
+          <input name="city" type='text' value={this.state.city.name} onChange={this.handleOnChange} placeholder="City" /><br />
           <input name="address" type='text' value={this.state.address} onChange={this.handleOnChange} placeholder="Address" /><br />
           <ButtonGroup vertical>
           <DropdownButton title={this.setTopic} id="bg-vertical-dropdown-1" onSelect={this.handleSelect}>
@@ -143,7 +143,7 @@ class EventEdit extends React.Component {
           </ButtonGroup>
           <br />
           <label>Or if not listed enter new topic below</label><br />
-          <input name="topic" type='text' value={this.state.topic} onChange={this.handleOnChange} placeholder="Topic" /><br />
+          <input name="topic" type='text' value={this.state.topic.name} onChange={this.handleOnChange} placeholder="Topic" /><br />
           <input type='submit' value="Submit Conference" /><br />
         </form>
       </div>
