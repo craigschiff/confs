@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux'
 import App from './App';
 import LoginCheck from './components/LoginCheck'
 import EventShow from './components/EventShow'
+import './index.css'
 // import NavbarMain from './components/NavbarMain'
 
 import EventEdit from './components/EventEdit'
@@ -70,8 +71,6 @@ const getEvents = () => {
           topicIds.push(topic.id)
           map.topics.push(topic)
         }
-        newEvent.city = event.relationships.city.data
-        newEvent.organizer = event.relationships.organizer.data
         map.events.push(newEvent)
         return map
       }, {events:[], topics: []})

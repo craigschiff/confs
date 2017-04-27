@@ -22,6 +22,7 @@ class NewEvent extends React.Component {
       perks: '',
       organizer: '',
       city: '',
+      image: '',
       topic: '',
       address: ''
     }
@@ -88,6 +89,7 @@ class NewEvent extends React.Component {
           <input name="name" type='text' value={this.state.name} onChange={this.handleOnChange} placeholder="Event Name" /><br />
           <textarea name="description" value={this.state.description} onChange={this.handleOnChange} type='text' placeholder="Event Description" /><br />
           <input name="website" type='text' value={this.state.website} onChange={this.handleOnChange} placeholder="Website URL" /><br />
+          <input name="image" type='text' value={this.state.image} onChange={this.handleOnChange} placeholder="Image URL" /><br />
           <input name="date" type="text" value={this.state.date} onChange={this.handleOnChange} placeholder="Enter Date" /><br />
           <input name="cost" type='text' value={this.state.cost} onChange={this.handleOnChange} placeholder="Event Cost" /><br />
           <textarea name="perks" type='text' value={this.state.perks} onChange={this.handleOnChange} placeholder="Presenter Perks" /><br />
@@ -95,7 +97,7 @@ class NewEvent extends React.Component {
           <input name="city" type='text' value={this.state.city} onChange={this.handleOnChange} placeholder="City" /><br />
           <input name="address" type='text' value={this.state.address} onChange={this.handleOnChange} placeholder="Address" /><br />
           <ButtonGroup vertical>
-          <DropdownButton title={this.setTopic} id="bg-vertical-dropdown-1" onSelect={this.handleSelect}>
+          <DropdownButton title={this.state.topic ? this.state.topic : 'Select Topic'} id="bg-vertical-dropdown-1" onSelect={this.handleSelect}>
             {this.showTopics()}
           </DropdownButton>
           </ButtonGroup>

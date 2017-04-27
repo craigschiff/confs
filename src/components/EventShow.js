@@ -3,14 +3,13 @@ import setEvent from '../actions/setEvent'
 import clearEvent from '../actions/setEvent'
 import editEvent from '../actions/editEvent'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginPage from './LoginPage'
 import NavbarMain from './NavbarMain'
-import {Row, Col, Grid} from 'react-bootstrap'
-
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
 
 
 class EventShow extends React.Component {
@@ -22,6 +21,7 @@ class EventShow extends React.Component {
       comment: '',
       name: ''
     }
+    this.eventData = this.eventData.bind(this)
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.showComments = this.showComments.bind(this)
@@ -29,8 +29,11 @@ class EventShow extends React.Component {
   componentWillReceiveProps(nextProps){
     if (nextProps.showEvent.name) { return }
     let id = parseInt(nextProps.match.params.id, 10)
+    this.eventData(id)
+  }
+  eventData(id){
     axios
-    .get(`https://devconfsapi.herokuapp.com/v1/events${id}`)
+    .get(`http://localhost:3001/v1/events/${id}`)
     .then((resp) => {
       let event = resp.data.data.attributes
       event.id = resp.data.data.id
@@ -40,13 +43,7 @@ class EventShow extends React.Component {
   componentWillMount(){
     if (this.props.showEvent.name) { return }
     let id = parseInt(this.props.match.params.id, 10)
-    axios
-    .get(`https://devconfsapi.herokuapp.com/v1/events${id}`)
-    .then((resp) => {
-      let event = resp.data.data.attributes
-      event.id = resp.data.data.id
-      this.props.setEvent(event)
-    })
+    this.eventData(id)
   }
   handleClick(){
     if (localStorage.getItem('jwt')){
@@ -55,15 +52,14 @@ class EventShow extends React.Component {
     } else {
       alert('YOU NEED TO LOG IN FIRST')
       this.setState({needLogin: true})
-      // this.props.push('/login')
     }
   }
   showComments(){
     return this.props.showEvent.comments.map((comment) => {
       return (
-        <div>
-          <h5>{comment.content}</h5>
-          <h6>-{comment.name}</h6>
+        <div className='comments-list'>
+          <h4>{comment.name}</h4>
+          {comment.content}
         </div>
       )
     })
@@ -73,9 +69,8 @@ class EventShow extends React.Component {
     let params = {name: this.state.name, content: this.state.comment}
     this.setState({comment: ''})
     axios
-    .post(`https://devconfsapi.herokuapp.com/v1/events${this.props.match.params.id}/comments`, params )
+    .post(`http://localhost:3001/v1/events/${this.props.match.params.id}/comments`, params )
     .then((resp) => {
-      console.log(this.props)
       let comment = resp.data.data
       let newComment = comment.attributes
       newComment.id = comment.id
@@ -87,7 +82,7 @@ class EventShow extends React.Component {
   onChange(event){
     let key = event.target.name
     let value = event.target.value
-    this.setState({[key]: event.target.value})
+    this.setState({[key]: value})
   }
 
 
@@ -96,7 +91,7 @@ class EventShow extends React.Component {
     let event = this.props.showEvent
 
     return (
-      <Grid>
+      <div>
       <Row>
         <NavbarMain />
       </Row>
@@ -104,7 +99,7 @@ class EventShow extends React.Component {
         <div id="eventShowBio">
         <h2>{event.name}</h2>
         <strong>Date: </strong>{event.date ? event.date.slice(0,10) : null}<br />
-        <img src={event.image} /><br />
+        <img src={event.image} alt='' /><br />
         {event.cost ? <strong>Cost: </strong> : null}{event.cost}<br />
         <strong>Description: </strong>{event.description}<br />
         {event.cost ? <strong>Website: </strong> : null}<br />
@@ -114,19 +109,19 @@ class EventShow extends React.Component {
         </div>
         {this.state.needLogin ? <LoginPage path={`/events/${this.props.match.params.id}/edit`} /> : null}
       </Col>
-      <Col xs={3} md={5}>
-        <div className='comments'>
-          <h4>Comments:</h4>
+      <Col xs={4} md={6}>
+          <h4>COMMENTS!</h4>
+          <div className='comments-list'>
           {event.comments && event.comments.length >0 ? this.showComments() : null}
+          </div>
+          <br /><br />
           <form onSubmit={this.handleSubmit}>
-            Name:<br/><input type='text' name='name' value={this.state.name} onChange={this.onChange} placeholder='your name' /><br />
-            Comment:<br/><textarea value={this.state.comment} onChange={this.onChange} name='comment' placeholder='enter comment!' /><br />
+            <input type='text' name='name' value={this.state.name} onChange={this.onChange} placeholder='your name' /><br />
+            <textarea value={this.state.comment} onChange={this.onChange} name='comment' placeholder='enter comment!' /><br />
             <input type='submit' value='submit' />
-
           </form>
-        </div>
       </Col>
-      </Grid>
+    </div>
     )
   }
 }

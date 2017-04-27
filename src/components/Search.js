@@ -5,10 +5,6 @@ import clearSearch from '../actions/clearSearch'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 import MenuItem from 'react-bootstrap/lib/MenuItem';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Button from 'react-bootstrap/lib/Button';
 import { push } from 'react-router-redux'
 
 
@@ -34,7 +30,7 @@ class Search extends React.Component {
   handleSubmit(event){
     event.preventDefault()
     this.props.clearSearch()
-    if (window.location.href.slice(-6) != 'events') this.props.push('/events')
+    if (window.location.href.slice(-6) !== 'events') this.props.push('/events')
     let searchResults = []
     this.props.events.forEach((event) => {
       if (event.description){

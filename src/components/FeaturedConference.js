@@ -6,7 +6,6 @@ import Carousel from 'react-bootstrap/lib/Carousel';
 
 export default class FeaturedConference extends React.Component {
     getInitialState() {
-      debugger
       return {
         index: 0,
         direction: null

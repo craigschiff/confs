@@ -22,8 +22,6 @@ class EventEdit extends React.Component {
         date: props.showEvent.date,
         cost: props.showEvent.cost,
         perks: props.showEvent.perks,
-        organizer: props.showEvent.organizer,
-        city: props.showEvent.city,
         topic: props.showEvent.topic.name,
         address: props.showEvent.address,
         id: props.showEvent.id
@@ -36,8 +34,6 @@ class EventEdit extends React.Component {
           date: props.showEvent.date,
           cost: props.showEvent.cost,
           perks: props.showEvent.perks,
-          organizer: props.showEvent.organizer,
-          city: props.showEvent.city,
           topic: props.showEvent.topic,
           address: props.showEvent.address,
           id: props.showEvent.id
@@ -49,20 +45,13 @@ class EventEdit extends React.Component {
     this.showTopics = this.showTopics.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.editEvent = this.editEvent.bind(this)
+    this.settingEvent = this.settingEvent.bind(this)
   }
 
   componentWillReceiveProps(nextProps){
     if (this.props.showEvent.name) { return }
     let id = parseInt(nextProps.match.params.id, 10)
-    axios
-    .get(`https://devconfsapi.herokuapp.com/v1/events${id}`)
-    .then((resp) => {
-      let event = resp.data.data.attributes
-      event.id = resp.data.data.id
-      this.props.setEvent(event)
-      this.setState({topic: event.topic.name})
-      })
-      return
+    this.settingEvent(id)
     }
   //   this.setState({
   //     name: event.name,
@@ -81,44 +70,53 @@ class EventEdit extends React.Component {
   componentWillMount(){
     if (this.props.showEvent.name) { return }
     let id = parseInt(this.props.match.params.id, 10)
+    this.settingEvent(id)
+    // axios
+    // .get(`http://localhost:3001/v1/events/${id}`)
+    // .then((resp) => {
+    //   let data = resp.data.data
+    //   let event = data.attributes
+    //   event.id = data.id
+    //   this.props.setEvent(event)
+    //   debugger
+    //   this.setState({
+    //     name: event.name,
+    //     description: event.description,
+    //     website: event.website,
+    //     date: event.date,
+    //     cost: event.cost,
+    //     perks: event.perks,
+    //     topic: event.topic.name,
+    //     address: event.address,
+    //     id: event.id
+    //   })
+    // })
+    //
+    // return
+  }
+
+  settingEvent(id){
+    debugger
     axios
     .get(`https://devconfsapi.herokuapp.com/v1/events${id}`)
     .then((resp) => {
-
       let event = resp.data.data.attributes
       event.id = resp.data.data.id
       this.props.setEvent(event)
-      debugger
-      this.setState({
-        name: event.name,
-        description: event.description,
-        website: event.website,
-        date: event.date,
-        cost: event.cost,
-        perks: event.perks,
-        topic: event.topic.name,
-        address: event.address,
-        id: event.id
+      this.setState({topic: event.topic.name})
       })
-    })
-
-    return
   }
 
   handleSubmit(event){
     event.preventDefault()
     let params = this.state
-    self = this
     axios
     .post(`https://devconfsapi.herokuapp.com/v1/events${this.state.id}`, {event: params} )
     .then((response) => {
-      let editedEvent = response.data.data.attributes
-      editedEvent.id = response.data.data.id
-      // this.setState(
-      //   {id: createdEvent.id,
-      //     submitted: true})
+      let data = response.data.data
+      let editedEvent = data.attributes
+      editedEvent.id = data.id
       this.editEvent(editedEvent)
-      this.props.setEvent(editedEvent)
       this.props.push(`/events/${editedEvent.id}`)
     })
     .catch((error) => {
@@ -148,9 +146,6 @@ class EventEdit extends React.Component {
 
 
   render(){
-    let organizer = this.props.showEvent.organizer
-    let city = this.props.showEvent.city
-    let topic = this.props.showEvent.topic
 
     return (
       <div>

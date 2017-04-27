@@ -12,23 +12,12 @@ import { bindActionCreators } from 'redux'
 
 
 class NavbarMain extends React.Component {
-  // links need to be added once route is made for topics and cities
   constructor(){
     super()
     this.handleClick = this.handleClick.bind(this)
   }
 
   showTopics(){
-    // debugger
-    // let topics = []
-    // let topic
-    // this.props.events.forEach((event) => {
-    //   topic = event.topic
-    //
-    //   if (!topics.includes(topic)){
-    //     topics.push(topic)
-    //   }
-    // })
   return this.props.topics.map((topic) => {
     return <MenuItem key={topic.id}><Link to={`/topics/${topic.id}`} role="menuitem" >{topic.name}</Link></MenuItem>
     })
@@ -45,12 +34,12 @@ class NavbarMain extends React.Component {
     })
   }
 
-  showCities(){
-  const citiesArray = ["New York", "San Francisco", "Chicago", "Los Angeles", "Boston", "Tel Aviv", "Seattle", "Berlin", "Singapore", "Paris", "Sao Paulo", "Moscow", "Austin", "Bangalore", "Sydney", "Toronto", "Vancouver", "Amsterdam", "Montreal"]
-    return citiesArray.map((city, index) => {
-    return <MenuItem key={index}><Link to={`events`} role="menuitem" >{city}</Link></MenuItem>
-    })
-  }
+  // showCities(){
+  // const citiesArray = ["New York", "San Francisco", "Chicago", "Los Angeles", "Boston", "Tel Aviv", "Seattle", "Berlin", "Singapore", "Paris", "Sao Paulo", "Moscow", "Austin", "Bangalore", "Sydney", "Toronto", "Vancouver", "Amsterdam", "Montreal"]
+  //   return citiesArray.map((city, index) => {
+  //   return <MenuItem key={index}><Link to={`events`} role="menuitem" >{city}</Link></MenuItem>
+  //   })
+  // }
 
   render() {
     return(

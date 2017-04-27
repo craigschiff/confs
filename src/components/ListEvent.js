@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import Col from 'react-bootstrap/lib/Col'
-import TextTruncate from 'react-text-truncate';
 
 
 class ListEvent extends React.Component {
@@ -14,7 +13,7 @@ class ListEvent extends React.Component {
           <div id="mainEventDiv">
             <h4><Link to={`/events/${event.id}`} > {event.name} </Link></h4>
             <strong>Date:</strong>{event.date ? event.date.split('T').shift().split('-').reverse().join('/') : null}<br />
-            <img id="eventImg" src={event.image} />
+            <img id="eventImg" src={event.image} alt='' />
             <br />
             {event.cost}<br />
           {event.description.slice(0, 300)}...<Link to={`/events/${event.id}`}><br />See More...</Link>
