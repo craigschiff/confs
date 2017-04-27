@@ -43,27 +43,26 @@ class NavbarMain extends React.Component {
 
   render() {
     return(
-        <Navbar inverse collapseOnSelect id="Navbar">
+        <Navbar class="navbar navbar-light" inverse collapseOnSelect id="Navbar">
           <Navbar.Header>
             <Navbar.Brand>
-              <a className="logotext" href="/events">DevCons</a>
+              <a id="logoText" href="/events">DevCons</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           <Search />
           <Navbar.Collapse>
             <Nav pullRight>
-              <NavItem> <Link to="/events">Home </Link></NavItem>
-              <NavItem eventKey={.5} ><Link to="/about">About</Link></NavItem>
-              <NavItem eventKey={.5} href='/events/new'><Link to="/events/new">New Event </Link></NavItem>
+              <NavItem> <Link to="/"><a id="navText">Home</a> </Link></NavItem>
+              <NavItem eventKey={.5} ><Link to="/about"><a id="navText">About</a></Link></NavItem>
+              <NavItem eventKey={.5} href='/events/new'><Link to="/events/new"><a id="navText">New Event</a> </Link></NavItem>
                 <NavDropdown eventKey={1} title="Or Select By Topic" id="basic-nav-dropdown-1">
                   {this.showTopics()}
                 </NavDropdown>
                 {localStorage.getItem('jwt') ?
                 <NavItem eventKey={4} href='/'> <button onClick={this.handleClick}>Logout</button> </NavItem> :
-                <NavItem eventKey={4} href='/'> <Link to="/login">Login/Sign Up </Link> </NavItem>
+                <NavItem eventKey={4} href='/'> <Link to="/login"><a id="navText">Login/Sign Up</a> </Link> </NavItem>
               }
-
               </Nav>
           </Navbar.Collapse>
         </Navbar>

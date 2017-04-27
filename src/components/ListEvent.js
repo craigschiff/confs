@@ -12,13 +12,14 @@ class ListEvent extends React.Component {
         <Col xs={6} md={4} log={6}>
           <div id="mainEventDiv">
             <h4><Link to={`/events/${event.id}`} > {event.name} </Link></h4>
-            <strong>Date:</strong>{event.date ? event.date.split('T').shift().split('-').reverse().join('/') : null}<br />
+            <strong>Date:</strong>{event.date ? event.date.split('T').shift().split('-').reverse().join('/') : null}
+            <br />
             <img id="eventImg" src={event.image} alt='' />
             <br />
+            <a id="topicTag">{event.topic ? <Link  to={`/topics/${event.topic.id}`} >{event.topic.name}</Link> : null}</a>
             {event.cost}<br />
           {event.description.slice(0, 300)}...<Link to={`/events/${event.id}`}><br />See More...</Link>
             <br />
-            {event.topic ? <Link to={`/topics/${event.topic.id}`} >{event.topic.name}</Link> : null}
           </div>
           <br />
         </Col>

@@ -1,3 +1,8 @@
+body {
+  font-family: 'Titillium Web', sans-serif;
+  color:black;
+}
+
 .App {
   text-align: center;
 }
@@ -12,31 +17,53 @@
 }
 
 #Navbar {
-  background-color: #3b5998;
-  color: #e6e6e6;
-}
-
-#Navbar:link {
-  color: pink;
+  background-color: #e3f2fd;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 #search-bar {
   padding-top: 10px;
 }
 
-.logotext {
+.navbar .nav > li > a {
+  color: black;
+}
+
+.navbar .nav > ul > li > a {
+  color: black;
+}
+
+#navText {
+  color: black;
+}
+
+#logoText {
   font-size: large;
   color: black;
   font-family: 'Rubik Mono One', sans-serif;
 }
 
+#topicTag {
+  background-color: #ffffff;
+  border: 1px solid gray;
+  border-radius: 1px 1px;
+  opacity: 0.6;
+}
+
+.logotext navbar-brand{
+  color: black;
+}
+
 #mainEventDiv {
   height: 450px;
   width: 100%;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;;
+
 }
 
 .login {
-  color:grey;
+  color:black;
 }
 
 #eventImg {
@@ -50,7 +77,6 @@
 #eventShowImg {
   width: 90%;
 }
-
 
 #bioText {
   text-align: center;
