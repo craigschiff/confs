@@ -46,9 +46,8 @@ class LoginPage extends React.Component {
       return this.redirect()
     })
     .catch((error) => {
-      throw(error)
       alert('USERNAME / PASSWORD NOT VALID')
-
+      throw(error)
     })
   }
   handleSignUp(event){
@@ -58,13 +57,12 @@ class LoginPage extends React.Component {
     .post('https://devconfs-api.herokuapp.com/v1/registrations', { account: params })
     .then((response) => {
       localStorage.setItem('jwt', response.data.jwt)
-      console.log(response.data.jwt)
       // this.login()
       return this.redirect()
     })
     .catch((error) => {
-      throw(error)
       alert('TRY AGAIN SUCKER')
+      throw(error)
     })
   }
 
