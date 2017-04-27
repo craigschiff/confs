@@ -5,6 +5,7 @@
 .App-header {
   height: 100px;
   color: white;
+
 }
 
 .App-intro {
@@ -13,7 +14,11 @@
 
 #Navbar {
   background-color: #3b5998;
+<<<<<<< HEAD:public/Main.css
   color: #e6e6e6;
+=======
+  color: black;
+>>>>>>> 50d1919fd05fc7fe177f4e7f94ab3ddf21f19ca1:src/index.css
 }
 
 #Navbar:link {
@@ -57,7 +62,12 @@
   text-align: center;
 }
 
+<<<<<<< HEAD:public/Main.css
 .comments{
   color: #3b5998;
   background-color: grey;
+=======
+.comments-list{
+   border-bottom: 2px dotted #cccccc;
+>>>>>>> 50d1919fd05fc7fe177f4e7f94ab3ddf21f19ca1:src/index.css
 }
