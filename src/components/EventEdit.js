@@ -96,6 +96,7 @@ class EventEdit extends React.Component {
   }
 
   settingEvent(id){
+    debugger
     axios
     .get(`http://localhost:3001/v1/events/${id}`)
     .then((resp) => {

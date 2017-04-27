@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux'
 import App from './App';
 import LoginCheck from './components/LoginCheck'
 import EventShow from './components/EventShow'
+import './index.css'
 // import NavbarMain from './components/NavbarMain'
 
 import EventEdit from './components/EventEdit'

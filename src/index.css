@@ -6,6 +6,7 @@
 .App-header {
   height: 100px;
   color: white;
+
 }
 
 .App-intro {
@@ -14,7 +15,7 @@
 
 #Navbar {
   background-color: #3b5998;
-  color: grey;
+  color: black;
 }
 
 #Navbar:link {
@@ -54,4 +55,8 @@
 
 #bioText {
   text-align: center;
+}
+
+.comments-list{
+   border-bottom: 2px dotted #cccccc;
 }

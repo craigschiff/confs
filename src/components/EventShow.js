@@ -12,7 +12,6 @@ import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 
 
-
 class EventShow extends React.Component {
   constructor(){
     super()
@@ -58,9 +57,9 @@ class EventShow extends React.Component {
   showComments(){
     return this.props.showEvent.comments.map((comment) => {
       return (
-        <div>
-          <h6>Name: {comment.name}</h6><br />
-          <p>Content: {comment.content}</p><br />
+        <div className='comments-list'>
+          <h4>{comment.name}</h4>
+          {comment.content}
         </div>
       )
     })
@@ -111,17 +110,18 @@ class EventShow extends React.Component {
         {this.state.needLogin ? <LoginPage path={`/events/${this.props.match.params.id}/edit`} /> : null}
       </Col>
       <Col xs={4} md={6}>
-        <div className='comments'>
           <h4>COMMENTS!</h4>
+          <div className='comments-list'>
+          {event.comments && event.comments.length >0 ? this.showComments() : null}
+          </div>
+          <br /><br />
           <form onSubmit={this.handleSubmit}>
             <input type='text' name='name' value={this.state.name} onChange={this.onChange} placeholder='your name' /><br />
             <textarea value={this.state.comment} onChange={this.onChange} name='comment' placeholder='enter comment!' /><br />
             <input type='submit' value='submit' />
-            {event.comments && event.comments.length >0 ? this.showComments() : null}
           </form>
-        </div>
       </Col>
-      </div>
+    </div>
     )
   }
 }

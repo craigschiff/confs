@@ -10,7 +10,6 @@ class MainEvents extends React.Component {
         {this.props.events.map((event, index) => {
           return <ListEvent key={index} event={event} />
         })}
-
       </div>
     )
   }
