@@ -61,7 +61,7 @@ class LoginPage extends React.Component {
       return this.redirect()
     })
     .catch((error) => {
-      alert('TRY AGAIN SUCKER')
+      alert('Please try again')
       throw(error)
     })
   }
