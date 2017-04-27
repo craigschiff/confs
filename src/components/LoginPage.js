@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
     event.preventDefault()
     let params = this.state
     axios
-    .post('http://localhost:3001/v1/sessions', { account: params })
+    .post('https://devconfs-api.herokuapp.com/v1/sessions', { account: params })
     .then((response) => {
       debugger
       localStorage.setItem('jwt', response.data.jwt)
@@ -54,7 +54,7 @@ class LoginPage extends React.Component {
     event.preventDefault()
     let params = this.state
     axios
-    .post('http://localhost:3001/v1/registrations', { account: params })
+    .post('https://devconfs-api.herokuapp.com/v1/registrations', { account: params })
     .then((response) => {
       localStorage.setItem('jwt', response.data.jwt)
       // this.login()

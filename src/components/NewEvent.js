@@ -43,7 +43,7 @@ class NewEvent extends React.Component {
     event.preventDefault()
     let params = this.state
     axios
-    .post('http://localhost:3001/v1/events', {event: params} )
+    .post('https://devconfsapi.herokuapp.com/v1/events', {event: params} )
     .then((response) => {
       let createdEvent = response.data.data.attributes
       createdEvent.id = response.data.data.id

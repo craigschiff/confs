@@ -72,7 +72,7 @@ class EventEdit extends React.Component {
     let id = parseInt(this.props.match.params.id, 10)
     this.settingEvent(id)
     // axios
-    // .get(`http://localhost:3001/v1/events/${id}`)
+    // .get(`https://devconfsapi.herokuapp.com/v1/events/${id}`)
     // .then((resp) => {
     //   let data = resp.data.data
     //   let event = data.attributes
@@ -98,7 +98,7 @@ class EventEdit extends React.Component {
   settingEvent(id){
     debugger
     axios
-    .get(`http://localhost:3001/v1/events/${id}`)
+    .get(`https://devconfsapi.herokuapp.com/v1/events/${id}`)
     .then((resp) => {
       let event = resp.data.data.attributes
       event.id = resp.data.data.id
@@ -111,7 +111,7 @@ class EventEdit extends React.Component {
     event.preventDefault()
     let params = this.state
     axios
-    .post(`http://localhost:3001/v1/events/${this.state.id}`, {event: params} )
+    .post(`https://devconfsapi.herokuapp.com/v1/events/${this.state.id}`, {event: params} )
     .then((response) => {
       let data = response.data.data
       let editedEvent = data.attributes

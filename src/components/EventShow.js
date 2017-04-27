@@ -33,7 +33,7 @@ class EventShow extends React.Component {
   }
   eventData(id){
     axios
-    .get(`http://localhost:3001/v1/events/${id}`)
+    .get(`https://devconfsapi.herokuapp.com/v1/events/${id}`)
     .then((resp) => {
       let event = resp.data.data.attributes
       event.id = resp.data.data.id
@@ -58,8 +58,8 @@ class EventShow extends React.Component {
     return this.props.showEvent.comments.map((comment) => {
       return (
         <div className='comments-list'>
-          <h4>{comment.name}</h4>
-          {comment.content}
+          <h4>{comment.content}</h4>
+          <h6>- {comment.name} -</h6>
         </div>
       )
     })
@@ -69,7 +69,7 @@ class EventShow extends React.Component {
     let params = {name: this.state.name, content: this.state.comment}
     this.setState({comment: ''})
     axios
-    .post(`http://localhost:3001/v1/events/${this.props.match.params.id}/comments`, params )
+    .post(`https://devconfsapi.herokuapp.com/v1/events/${this.props.match.params.id}/comments`, params )
     .then((resp) => {
       let comment = resp.data.data
       let newComment = comment.attributes
