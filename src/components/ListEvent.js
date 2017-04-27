@@ -20,6 +20,7 @@ class ListEvent extends React.Component {
             <br />
             {event.topic ? <Link to={`/topics/${event.topic.id}`} >{event.topic.name}</Link> : null}
           </div>
+          <br />
         </Col>
       </div>
     )
