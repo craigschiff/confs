@@ -69,8 +69,6 @@ const getEvents = () => {
           topicIds.push(topic.id)
           map.topics.push(topic)
         }
-        newEvent.city = event.relationships.city.data
-        newEvent.organizer = event.relationships.organizer.data
         map.events.push(newEvent)
         return map
       }, {events:[], topics: []})

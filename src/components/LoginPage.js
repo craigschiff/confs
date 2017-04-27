@@ -57,7 +57,6 @@ class LoginPage extends React.Component {
     .post('http://localhost:3001/v1/registrations', { account: params })
     .then((response) => {
       localStorage.setItem('jwt', response.data.jwt)
-      console.log(response.data.jwt)
       // this.login()
       return this.redirect()
     })

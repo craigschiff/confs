@@ -72,7 +72,6 @@ class EventShow extends React.Component {
     axios
     .post(`http://localhost:3001/v1/events/${this.props.match.params.id}/comments`, params )
     .then((resp) => {
-      console.log(this.props)
       let comment = resp.data.data
       let newComment = comment.attributes
       newComment.id = comment.id
