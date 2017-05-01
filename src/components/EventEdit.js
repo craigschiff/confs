@@ -9,6 +9,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import editEvent from '../actions/editEvent'
 import NavbarMain from '../components/NavbarMain'
+import Col from 'react-bootstrap/lib/Col'
 
 
 class EventEdit extends React.Component {
@@ -19,6 +20,7 @@ class EventEdit extends React.Component {
         name: props.showEvent.name,
         description: props.showEvent.description,
         website: props.showEvent.website,
+        image: props.showEvent.image,
         date: props.showEvent.date,
         cost: props.showEvent.cost,
         perks: props.showEvent.perks,
@@ -96,14 +98,24 @@ class EventEdit extends React.Component {
   }
 
   settingEvent(id){
-    debugger
     axios
     .get(`https://devconfsapi.herokuapp.com/v1/events/${id}`)
     .then((resp) => {
       let event = resp.data.data.attributes
       event.id = resp.data.data.id
       this.props.setEvent(event)
-      this.setState({topic: event.topic.name})
+      this.setState({
+          name: event.name,
+          description: event.description,
+          website: event.website,
+          image: event.image,
+          date: event.date,
+          cost: event.cost,
+          perks: event.perks,
+          topic: event.topic.name,
+          address: event.address,
+          id: event.id
+        })
       })
   }
 
@@ -151,17 +163,20 @@ class EventEdit extends React.Component {
       <div>
         <NavbarMain />
         <h1>Edit Your Conference!</h1>
+        <Col xs={6} md={6}>
         <form onSubmit={this.handleSubmit}>
-          <input name="name" type='text' value={this.state.name} onChange={this.handleOnChange} placeholder="Event Name" /><br />
-          <textarea name="description" value={this.state.description} onChange={this.handleOnChange} type='text' placeholder="Event Description" /><br />
-          <input name="website" type='text' value={this.state.website} onChange={this.handleOnChange} placeholder="Website URL" /><br />
-          <input name="date" type="text" value={this.state.date} onChange={this.handleOnChange} placeholder="Enter Date" /><br />
-          <input name="cost" type='text' value={this.state.cost} onChange={this.handleOnChange} placeholder="Event Cost" /><br />
-          <textarea name="perks" type='text' value={this.state.perks} onChange={this.handleOnChange} placeholder="Presenter Perks" /><br />
-          <input name="address" type='text' value={this.state.address} onChange={this.handleOnChange} placeholder="Address" /><br />
-          <label>Topic: </label>
+
+          <label>Name: &nbsp; &nbsp; </label><input name="name" type='text' value={this.state.name} onChange={this.handleOnChange} placeholder="Event Name" /><br />
+          <label>Description: &nbsp; &nbsp; </label><textarea name="description" value={this.state.description} onChange={this.handleOnChange} type='text' placeholder="Event Description" /><br />
+          <label>Website: &nbsp; </label><input name="website" type='text' value={this.state.website} onChange={this.handleOnChange} placeholder="Website URL" /><br />
+          <label>Image: &nbsp; </label><input name="image" type='text' value={this.state.image} onChange={this.handleOnChange} placeholder="Image URL" /><br />
+          <label>Date: &nbsp; </label><input name="date" type="text" value={this.state.date} onChange={this.handleOnChange} placeholder="Enter Date" /><br />
+          <label>Cost: &nbsp; </label><input name="cost" type='text' value={this.state.cost} onChange={this.handleOnChange} placeholder="Event Cost" /><br />
+          <label>Perks: &nbsp; </label><textarea name="perks" type='text' value={this.state.perks} onChange={this.handleOnChange} placeholder="Presenter Perks" /><br />
+          <label>Address: &nbsp; </label><input name="address" type='text' value={this.state.address} onChange={this.handleOnChange} placeholder="Address" /><br />
+          <label>Topic: &nbsp; </label>
           <ButtonGroup vertical>
-          <DropdownButton title={this.setTopic} value={this.state.topic} id="bg-vertical-dropdown-1" onSelect={this.handleSelect}>
+          <DropdownButton title={this.state.topic ? this.state.topic : 'Select Topic'} value={this.state.topic} id="bg-vertical-dropdown-1" onSelect={this.handleSelect}>
             {this.showTopics()}
           </DropdownButton>
           </ButtonGroup>
@@ -171,6 +186,7 @@ class EventEdit extends React.Component {
 
           <input type='submit' value="Submit Conference" /><br />
         </form>
+        </Col>
       </div>
     )
   }
